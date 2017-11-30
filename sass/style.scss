@@ -1,0 +1,729 @@
+@import "utilities/variables";
+@import "utilities/mixins";
+@import "state/mediaQueries";
+
+
+*{
+    font-family: $primaryFont;
+    list-style-type: none;
+}
+
+//HELP MODAL STYLES//
+.help-modal{
+    height: 100vh;
+    width: 100vw;
+    .help-modal-dialog{
+        width:100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        .modal-content{
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            .modal-header{
+                background-color: $darkColor;
+                border-bottom: none;
+                .modal-title{
+                    @include modalHeaderTypeStyles;
+                }
+                .close{
+                    opacity: 1;
+                    position: absolute;
+                    z-index: 1;
+                    .fa-times{
+                        color: $lightColor;
+                        font-size: 30px;
+                    }
+                }
+            }
+            .modal-body{
+                background-color: $darkColor;
+                text-align: center;
+                color: $lightColor;
+                padding-bottom: 20px;
+                ul{
+                    padding: 0;
+                    padding-top: 10px;
+                }
+                p, li{
+                    @include paragraphTextStyles;
+                    padding: 2.5px;
+                }
+                span{
+                    color: $secondaryColor;
+                }
+            }
+        }  
+    }
+}
+    
+
+//LANDING PAGE STYLES//
+.landing-page-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    background-color: $primaryColor; 
+    // display: none;
+    .main-content-wrapper{
+        width: 90%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .icon-wrapper{
+            align-self: flex-end;
+            justify-content: flex-start;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            button{
+                padding: 0;
+                background-color: transparent;
+                border: none;
+                i{
+                    color: $secondaryColor;
+                    font-size: 55px;
+                    padding: 5px;
+                }
+            }
+        }
+
+        .landing-main-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .logo{
+                width:95%;
+                padding: 15px;
+            }
+            p{
+                @include paragraphTextStyles;
+                color: $secondaryColor;
+                letter-spacing: 0.5px;
+                text-align: center;
+                padding: 15px;
+            }
+            .btn{
+                @include boldH3TextStyles;
+                text-transform: uppercase;
+                background-color: $secondaryColor;
+                color: $darkColor;
+                width: 500px;
+                height: 80px;
+                border-radius: $borderRadius;
+                padding: 15px;
+            }
+        }
+    }  
+}
+
+//MAIN APP CONTENT STYLES//
+.main-app-content{
+    width: 100vw;
+    height: 100vh;
+
+    //Header Bar Styles//
+   .header-bar{
+        width: 100%;
+        height: 8%;
+        background-color: $primaryColor;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .logo{
+            height: 80%;
+            margin: 10px;
+        }
+        button{
+            padding: 0;
+            margin-right: 15px;
+            background-color: transparent;
+            border: none;
+            i{
+                color: $secondaryColor;
+                font-size: 55px;
+                padding: 5px;
+            }
+        }
+    }
+    //MapBox Styles//
+    #map{
+        width: 100%;
+        height: 55%;
+        background-color: $greyColor;
+    }
+
+    //Form Styles//
+    .form-wrapper{
+        width: 100%;
+        height: 37%;
+        background-color: $primaryColor;
+
+        //Question One Styles//
+        .question-one{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            // display: none;
+            .btn,
+            .empty-placeholder{
+                height: 100%;
+                width: 8%;
+                border-radius: 0;
+                background-color: $lightBlueColor;
+                .fa-caret-right{
+                    font-size:140px;
+                    color: $primaryColor;
+                }
+            }
+            .question-one-content{
+                height: 100%;
+                width: 83%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .section-question{
+                    @include sectionHeaderTypeStyles;
+                    padding: 5px;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+                .trip-buttons-wrapper{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    padding-bottom: 20px;
+                    .trip-type-btn{
+                        width: 250px;
+                        height: 70px;
+                        background-color: $lightColor;
+                        @include boldH3TextStyles;
+                        color: $darkColor;
+                        border-radius: $borderRadius;
+                        margin: 10px;
+                    }
+                    .trip-type-btn:focus{
+                        background-color: $darkColor;
+                        color: $secondaryColor;
+                    }
+                }
+            }
+        }
+
+        //Question One Customise Styles//
+        .question-one-customise{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            // display: none;
+            .btn{
+                height: 100%;
+                width: 8%;
+                border-radius: 0;
+                background-color: $lightBlueColor;
+                display: flex;
+                justify-content: space-around;
+                .fa-caret-right,
+                .fa-caret-left{
+                    font-size:130px;
+                    color: $primaryColor;
+                    margin:2.5px;
+                }
+            }
+            .question-one-customise-content{
+                height: 100%;
+                width: 83%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .section-question{
+                    @include sectionHeaderTypeStyles;
+                    padding: 5px;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+
+                
+                .select-route-wrapper{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    width: 100%;
+
+                    .start-location-wrapper,
+                    .end-location-wrapper{
+                        margin: 20px;
+                        label{
+                            font-size: 20px;
+                            font-weight: $boldFontWeight;
+                            color: $darkColor;
+                        }
+                        .rail-select {
+                            position: relative;
+                            width: 250px;
+                            
+                            select {
+                                border: solid 1px grey;
+                                border-radius: $borderRadius;
+                                font-size: 16px;
+                                color: $darkColor;
+                                height: 45px;
+                                appearance: none;
+                                -moz-appearance: none;
+                                -webkit-appearance: none;
+                                box-shadow: none;
+                                
+                                &:focus {
+                                outline: none;
+                                box-shadow: none;
+                                border: solid 1px grey;
+                                }
+                            }
+                            
+                            .select-arrow {
+                                &:before {
+                                content : "";
+                                position: absolute;
+                                left    : 0;
+                                bottom  : 0;
+                                height  : 100%;
+                                width   : 100px;  
+                                }
+                                
+                                width: 40px;
+                                position: absolute;
+                                top: 0px;
+                                background-color: $lightColor;
+                                height: 100%;
+                                left: 225px;
+                                border-radius: 0px 10px 10px 0px;
+                                border-right: solid 1px gray;
+                                border-top: solid 1px gray;
+                                border-bottom: solid 1px gray;
+                                pointer-events:none;
+                            
+                                i {
+                                    & {
+                                        color: $secondaryColor;
+                                        font-size: 20px;
+                                    }
+                                }
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                        }
+                    }  
+                }
+            }
+        }
+        //Question Two and Three Styles
+        .question-two,
+        .question-three{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            display:none;
+            .btn{
+                height: 100%;
+                width: 8%;
+                border-radius: 0;
+                background-color: $lightBlueColor;
+                display: flex;
+                justify-content: space-around;
+                .fa-caret-right,
+                .fa-caret-left{
+                    font-size:130px;
+                    color: $primaryColor;
+                    margin:2.5px;
+                }
+            }
+            .question-two,
+            .question-three{
+                height: 100%;
+                width: 83%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .section-question{
+                    @include sectionHeaderTypeStyles;
+                    padding: 5px;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+
+                .seat-buttons-wrapper,
+                .day-buttons-wrapper{
+                    width: 100%;
+                    height: 105px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 25px;
+
+                    .btn{
+                        background-color: $darkerBlueColor;
+                        width: 105px;
+                        height: 100%; 
+                        position: relative;
+                        i{
+                            color: $secondaryColor;
+                            font-size: 60px;
+                        }
+                    }
+
+                    .minus-btn{
+                        border-top-left-radius: $borderRadius;
+                        border-bottom-left-radius: $borderRadius;
+                    }
+                    .add-btn{
+                        border-top-right-radius: $borderRadius;
+                        border-bottom-right-radius: $borderRadius;
+                    }
+                    .plus-minus-quantity{
+                        width: 150px;
+                        height: 100%;
+                        background-color: $lightColor;
+                        
+                        p{
+                            color: $darkColor;
+                            font-weight: $boldFontWeight;
+                            font-size: 75px;
+                            text-align: center;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        //Question Four Styles
+        .question-four{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            display: none;
+            .btn{
+                height: 100%;
+                width: 8%;
+                border-radius: 0;
+                background-color: $lightBlueColor;
+                display: flex;
+                justify-content: space-around;
+                .fa-caret-right,
+                .fa-caret-left{
+                    font-size:130px;
+                    color: $primaryColor;
+                    margin:2.5px;
+                }
+            }
+            .question-four{
+                height: 100%;
+                width: 83%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .section-question{
+                    @include sectionHeaderTypeStyles;
+                    padding: 5px;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+                .vehicle-options-wrapper{
+                    width: 95%;
+                    // height: 80%;
+                    overflow: scroll;
+                    display: flex;
+                    flex-direction: row;
+                    .vehicle-option{
+                        border-radius: $borderRadius;
+                        background-color: $lightColor;
+                        min-width: 300px;
+                        height: 165px;
+                        margin: 10px;
+                        overflow: hidden;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        img{
+                            height: 95%;
+                            border-radius: $borderRadius;
+                        }
+                        p{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//VEHCLE INFO MODAL STYLES//
+.vehicle-info-modal{
+    height: 100vh;
+    width: 100vw;
+    .vehicle-info-modal-dialog{
+        width:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        .vehicle-info-modal-content{
+            max-width: 650px;
+            max-height: 930px;
+            margin: 50px;
+            border-radius: 10px;
+            overflow: scroll;
+            .vehicle-info-modal-header{
+                background-color: $darkColor;
+                border-bottom: none;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .vehicle-info-modal-title{
+                    @include modalHeaderTypeStyles; 
+                    font-size: $h3FontSize;                   
+                }
+                .close{
+                    opacity: 1;
+                    position: absolute;
+                    left: 15px;
+                    top: 15px;
+
+                    .fa-times{
+                        color: $lightColor;
+                        font-size: 30px;
+                    }
+                }
+            }
+            .vehicle-info-modal-body{
+                background-color: $lightColor;
+                padding: 20px;
+                min-width: 400px;
+                max-width: 980px;
+
+                .vehicle-image-wrapper{
+                    height: 20%;
+                    width: 55%;
+                    margin: 0 auto;
+                    img{
+                        width: 100%;
+                        padding: 15px;
+                    }
+                }
+                .rental-info-wrapper{
+                    height: 50%;
+                    width: 95%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    margin: 0 auto;
+
+                    //TRIP COST STYLES//
+                    .trip-cost-container{
+                        width: 440px;
+                        border: solid 1px $darkColor;
+                        border-radius: 10px;
+                        margin: 15px;
+                        overflow: hidden;
+
+                        .trip-cost-header{
+                            background-color: $darkColor;
+                            height: 50px;
+                            display: flex;
+                            justify-content: center;
+                            p{
+                                @include modalHeaderTypeStyles;
+                                font-size: $h3FontSize;
+                                text-transform: uppercase;
+                                margin: 0;
+                                padding-top: 5px;
+                            }
+                        }
+                        .travel-distance,
+                        .number-of-people,
+                        .travel-length,
+                        .total-cost{
+                            width: 100%;
+                            margin: 0 auto;
+                            border-bottom: solid 2px $greyColor;
+                            height: 50px;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            .trip-cost-value{
+                                @include paragraphTextStyles;
+                            }
+                            p{
+                                font-size: $paragraphFontSize;
+                                font-weight: 600;
+                                margin-left: 20px;
+                                margin-right: 20px;
+                                margin-bottom: 0;
+                            }
+                        }
+                        .rental-price,
+                        .fuel-cost{
+                            width: 100%;
+                            margin: 0 auto;
+                            border-bottom: solid 2px $greyColor;
+                            height: 60px;
+                            display: flex;
+                            flex-direction: column;
+                            padding: 5px;
+                            .rental-wrapper,
+                            .fuel-wrapper{
+                                width: 100%;
+                                margin: 0 auto;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                p{
+                                    font-size: $paragraphFontSize;
+                                    font-weight: 600;
+                                    margin-left: 20px;
+                                    margin-right: 20px;
+                                    margin-bottom: 0;
+                                }
+                                .trip-cost-value{
+                                    @include paragraphTextStyles;
+                                }
+                            }
+                            #rentalPriceCalculation,
+                            #fuelCostCalculation{
+                                font-size: $paragraphFontSize;
+                                font-weight: $lightFontWeight;
+                                color: $darkColor;
+                                margin: 0;
+                                margin-left: 20px;
+                                margin-right: 20px;
+                                align-self: flex-end;
+                            }
+                        }
+                    }
+
+                    //RENTAL INFO STYLES//
+                    .rental-info-container{
+                        max-width: 440px;
+                        border: solid 1px $darkColor;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        margin: 15px;
+
+                        .rental-info-header{
+                            background-color: $darkColor;
+                            height: 50px;
+                            display: flex;
+                            justify-content: center;
+                            p{
+                                @include modalHeaderTypeStyles;
+                                font-size: $h3FontSize;
+                                text-transform: uppercase;
+                                margin: 0;
+                                padding-top: 5px;
+                            }
+                        }
+                        .hertz-logo-wrapper{
+                            width: 100%;
+                            height: 140px;
+                            border-bottom: solid 2px $greyColor;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 10px;
+                            img{
+                                height: 80%;
+                                
+                            }
+                            
+                        }
+
+                        .hertz-name-wrapper,
+                        .disclaimer,
+                        .hertz-phone,
+                        .hertz-site{
+                            width: 100%;
+                            margin: 0 auto;
+                            border-bottom: solid 2px $greyColor;
+                            height: 50px;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            text-align: center;
+                            .hertz-info{
+                                @include paragraphTextStyles;
+                            }
+                            p{
+                                font-size: $paragraphFontSize;
+                                font-weight: 600;
+                                margin-left: 20px;
+                                margin-right: 20px;
+                                margin-bottom: 0;
+                            }
+                            .hertz-info-header{
+                                font-size: 25px;
+                                font-weight: $boldFontWeight;
+                                color: $darkColor;
+                                text-align: center;
+                                width: 100%;
+                            }
+                        }
+                        .disclaimer{
+                            height: 90px;
+                            text-align: center;
+                        }
+
+                    }
+
+                    .rental-info-button-wrapper{
+                        margin: 10px;
+                        .btn{
+                            height: 45px;
+                            width: 180px;
+                            background-color: $greyColor;
+                            font-size: $paragraphFontSize;
+                            font-weight: $boldFontWeight;
+                            color: $darkColor;
+                            margin: 5px;
+                        }
+                        .close-btn{
+                            background-color: $primaryColor;
+                        }
+                    }
+                }
+            }
+        }  
+    }
+}
+

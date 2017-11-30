@@ -1,0 +1,36 @@
+@import "utilities/variables";
+@import "utilities/mixins";
+
+@media only screen and (min-width: 1000px) {
+    .seat-buttons-wrapper,
+    .day-buttons-wrapper{
+        .btn{
+            i:hover{
+                color: $lightColor!important;
+            }
+        }
+    }
+
+    .vehicle-options-wrapper{
+        .vehicle-option:hover{
+            background-color: $darkColor!important;
+            img{
+                display: none;
+            }
+            p{
+                display: block!important;
+                font-size: $h4FontSize;
+                font-weight: $boldFontWeight;
+                color: $secondaryColor;
+                margin: 0;
+            }
+        }
+    }
+    
+    .trip-buttons-wrapper{
+        .trip-type-btn:focus{
+            background-color: $darkColor;
+            color: $secondaryColor;
+        }
+    }
+}

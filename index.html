@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset = "UTF-8">
+
+        <title>DrivePie | Tourism NZ</title>
+
+        <!-- FAVICON LINK -->
+        <link rel="shortcut icon" type="image/png" href="favicon.png">
+
+        <!-- CSS LINK -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- FONT LINK -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600" rel="stylesheet">
+
+        <!-- Latest Bootstrap compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous">
+        <!-- Bootstrap Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- MapBox CSS LINK -->
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.css' rel='stylesheet' />
+
+        <!-- FONT AWESOME LINK -->
+        <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+
+        <!-- JQUERY PAGE TRANSITION CSS -->
+        <link href="js/Smooth-Single-Page-Transition-Effects-Using-jQuery-CSS3-page-js/jquery.page.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <!-- HELP MODAL -->
+        <div class="modal fade help-modal" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+            <div class="modal-dialog help-modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <h5 class="modal-title" id="helpModalLabel">How It Works?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Find a rental vehicle with DrivePie and visit the places seen in the classic New Zealand movie, Goodbye Pork pie!</p>
+                        <p>Only in a few steps, you can be on your way.</p>
+
+                        <ul class="help-steps">
+                            <li><span>1.</span> Pick a Trip you would like to go on, or customise your trip by selecting your route.</li>
+                            <li><span>2.</span> Indicate amount of seats you require.</li>
+                            <li><span>3.</span> Specify the amount of days you will be traveling.</li>
+                            <li><span>4.</span> Select a rental vehicle.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LANDING PAGE CONTENT -->
+        <div class="landing-page-wrapper page jquery-page-active" data-jquery-page-name="1" >
+            <div class="main-content-wrapper">
+                <div class="icon-wrapper">
+                    <button class="help-button" data-toggle="modal" data-target="#helpModal">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="landing-main-content">
+                    <img class="logo" src="img/logos/drivePieLogo.png" alt="drivePieLogo">
+                    <p>See the sites from the New Zealand Movie Classic, Goodbye Pork Pie</p>
+                    <button type="button" class="btn navigate" data-page-name="2" data-page-trans="flip-towards-left">Start Planning</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN APP CONTENT -->
+        <div class="main-app-content page jquery-page-disabled" data-jquery-page-name="2">
+            <header class="header-bar">
+                <img class="logo" src="img/logos/drivePieLogo.png" alt="drivePieLogo">
+                <button type="button" data-toggle="modal" data-target="#helpModal">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </button>
+            </header>
+
+            <div id='map'></div>
+
+            <div class="form-wrapper">
+                <!-- Pick a Trip Question -->
+                <div class="question-one page" data-jquery-page-name="3">
+                    <div class="empty-placeholder"></div>
+
+                    <div class="question-one-content">
+                        <h2 class="section-question">Pick a Trip</h2>
+                        <div class="btn-group trip-buttons-wrapper" role="group" aria-label="...">
+                            <button type="button" class="btn trip-type-btn" value="fullTrip">Full Trip</button>
+                            <button type="button" class="btn trip-type-btn" value="northIsland">North Island</button>
+                            <button type="button" class="btn trip-type-btn" value="southIsland">South Island</button>
+                            <button type="button" class="btn trip-type-btn" value="customise">Customise</button>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- Choose Your Route Question -->
+                <div class="question-one-customise page" data-jquery-page-name="4">
+                    
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-left" aria-hidden="true"></i>
+                    </button>
+
+                    <div class="question-one-customise-content">
+                        <h2 class="section-question">Choose Your Route</h2>
+
+                        <div class="form-group select-route-wrapper">
+
+                            <div class="start-location-wrapper">
+                                <label for="sel1">Start Loaction:</label>
+                                <div class="rail-select">
+                                    <div class="select-arrow">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </div>
+                                    <select class="form-control" id="sel1">
+                                        <option value="">Select a Starting Point</option>
+                                        <option value="kaitaia">Kaitaia</option>
+                                        <option value="auckland">Auckland</option>
+                                        <option value="wanganui">Wanganui</option>
+                                        <option value="wellington">Wellington</option>
+                                        <option value="greymouth">Greymouth</option>
+                                        <option value="christchurch">Christchurch</option>
+                                        <option value="queenstown">Queenstown</option>
+                                        <option value="dunedin">Dunedin</option>
+                                        <option value="invercargill">Invercargill</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="end-location-wrapper">
+                                <label for="sel2">End Loaction:</label>
+                                <div class="rail-select">
+                                    <div class="select-arrow">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </div>
+                                    <select class="form-control" id="sel2">
+                                        <option value="">Select a End Point</option>
+                                        <option value="kaitaia">Kaitaia</option>
+                                        <option value="auckland">Auckland</option>
+                                        <option value="wanganui">Wanganui</option>
+                                        <option value="wellington">Wellington</option>
+                                        <option value="greymouth">Greymouth</option>
+                                        <option value="christchurch">Christchurch</option>
+                                        <option value="queenstown">Queenstown</option>
+                                        <option value="dunedin">Dunedin</option>
+                                        <option value="invercargill">Invercargill</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- How Many Seats Question -->
+                <div class="question-two">
+                
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-left" aria-hidden="true"></i>
+                    </button>
+                
+                    <div class="question-two">
+                        <h2 class="section-question">How many seats do you require?</h2>
+
+                        <div class="seat-buttons-wrapper">
+                            <button type="button" class="btn minus-btn" value="minus">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                            <div class="plus-minus-quantity"><p>0</p></div>
+                            <button type="button" class="btn add-btn" value="add">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- How Many Days Question -->
+                <div class="question-three">
+                
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-left" aria-hidden="true"></i>
+                    </button>
+                
+                    <div class="question-three">
+                        <h2 class="section-question">How many days will you be travelling?</h2>
+                
+                        <div class="day-buttons-wrapper">
+                            <button type="button" class="btn minus-btn" value="minus">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                            <div class="plus-minus-quantity">
+                                <p>0</p>
+                            </div>
+                            <button type="button" class="btn add-btn" value="add">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                
+                    </div>
+                
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- Select Rental Vehicle Question -->
+                <div class="question-four">
+                
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-left" aria-hidden="true"></i>
+                    </button>
+                
+                    <div class="question-four">
+                        <h2 class="section-question">Select a Rental Vehicle</h2>
+                
+                        <div class="vehicle-options-wrapper">
+                            <div class="motorbike-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                <img src="img/vehicleImages/motorcycle.jpg" alt="motorbike">
+                                <p>More Info</p>
+                            </div>
+                            <div class="small-car-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                <img src="img/vehicleImages/smallCar.jpg" alt="smallCar">
+                                <p>More Info</p>
+                            </div>
+                            <div class="large-car-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                <img src="img/vehicleImages/largeCar.jpg" alt="largeCar">
+                                <p>More Info</p>
+                            </div>
+                            <div class="motorhome-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                <img src="img/vehicleImages/motorhome.jpg" alt="motorhome">
+                                <p>More Info</p>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <button type="button" class="btn">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VEHICLE INFO MODAL -->
+        <div class="modal fade vehicle-info-modal" id="vehicleInfoModal" tabindex="-1" role="dialog" aria-labelledby="vehicleInfoModalLabel" aria-hidden="true">
+            <div class="modal-dialog vehicle-info-modal-dialog" role="document">
+                <div class="modal-content  vehicle-info-modal-content">
+                    <div class="modal-header  vehicle-info-modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <h5 class="modal-title  vehicle-info-modal-title" id="vehicleInfoModalLabel">MINI COOPER S 3-DOOR HATCH</h5>
+                    </div>
+                    <div class="modal-body vehicle-info-modal-body">
+                        <div class="vehicle-image-wrapper">
+                            <img src="img/vehicleImages/largeCar.jpg" alt="vehicleImage">
+                        </div>
+                        <div class="rental-info-wrapper">
+                            <!-- TRIP COST CONTAINER -->
+                            <div class="trip-cost-container">
+                                <div class="trip-cost-header">
+                                    <p>Trip Cost</p>
+                                </div>
+                                <div class="travel-distance">
+                                    <p>Travel Distance:</p>
+                                    <p class="trip-cost-value" id="traveDistance">km</p>
+                                </div>
+                                <div class="number-of-people">
+                                    <p>No. of People:</p>
+                                    <p class="trip-cost-value" id="numberOfPeople">#</p>
+                                </div>
+                                <div class="travel-length">
+                                    <p>Travel Length:</p>
+                                    <p class="trip-cost-value" id="numberOfDays">#</p>
+                                </div>
+                                <div class="rental-price">
+                                    <div class="rental-wrapper">
+                                        <p>Rental Price:</p>
+                                        <p class="trip-cost-value" id="rentalPrice">$</p>
+                                    </div>
+                                    <p id="rentalPriceCalculation">()</p>
+                                </div>
+                                <div class="fuel-cost">
+                                    <div class="fuel-wrapper">
+                                        <p>Estimate Fuel Cost:</p>
+                                        <p class="trip-cost-value" id="fuelCost">$</p>
+                                    </div>
+                                    <p id="fuelCostCalculation">()</p>
+                                </div>
+                                <div class="total-cost">
+                                    <p>Estimate Total Cost:</p>
+                                    <p class="trip-cost-value" id="totalCost">$</p>
+                                </div>
+                            </div>
+
+                            <!-- RENTAL INFO CONTAINER -->
+                            <div class="rental-info-container">
+                                <div class="rental-info-header">
+                                    <p>Rental Info</p>
+                                </div>
+                                <div class="hertz-logo-wrapper">
+                                    <img src="img/logos/Hertz_Logo.png" alt="hertzLogo">
+                                </div>
+                                <div class="hertz-name-wrapper">
+                                    <p class="hertz-info-header">Hertz Car Rentals</p>
+                                </div>
+                                <div class="disclaimer">
+                                    <p class="hertz-info">Please contact this car rental agency in order to finialise your rental booking.</p>
+                                </div>
+                                <div class="hertz-phone">
+                                    <p>Phone:</p>
+                                    <p class="hertz-info"><a href="tel:09 2568692"></a>09 2568692</p>
+                                </div>
+                                <div class="hertz-site">
+                                    <p>Website:</p>
+                                    <p class="hertz-info"> <a target="_blank" href="https://www.hertz.co.nz/">www.hertz.co.nz</a></p>
+                                </div>
+                            </div>
+
+                            <div class="rental-info-button-wrapper">
+                                <button type="button" class="btn" data-dismiss="modal" aria-label="Close">New Search</button>
+                                <button type="button" class="btn close-btn" data-dismiss="modal" aria-label="Close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- jQuery CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Latest Bootstrap compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- MapBox Script -->
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.js'></script>
+        <!-- SMOOTH PAGE TRANSITION PLUGIN -->
+        <script src="jquery.page.js"></script>
+        <!-- Custom JS -->
+        <script src="js/custom.js"></script>
+
+    </body>
+</html>

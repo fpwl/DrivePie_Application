@@ -1,0 +1,30 @@
+@mixin paragraphTextStyles {
+    font-weight: $paragraphFontWeight;
+    font-size: $paragraphFontSize;
+}
+
+@mixin boldParagraphTextStyles {
+    font-weight: $boldFontWeight;
+    font-size: $paragraphFontSize;
+}
+
+@mixin boldH3TextStyles {
+    font-weight: $boldFontWeight;
+    font-size: $h3FontSize;
+}
+
+@mixin modalHeaderTypeStyles{
+    font-size: $h2FontSize;
+    font-weight: $boldFontWeight;
+    color: $secondaryColor;
+    text-align: center;
+}
+
+@mixin sectionHeaderTypeStyles{
+    font-size: $h2FontSize;
+    font-weight: $boldFontWeight;
+    color: $secondaryColor;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
