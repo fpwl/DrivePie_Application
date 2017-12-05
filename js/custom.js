@@ -2,56 +2,83 @@
 
 (function () {
 
-    //Global variables
-    //Buttons
-    var getStartedBtn = document.getElementById('getStartedBtn');
-    var logo = document.getElementById('logo');
+    //Initial Invokations
+    hidingPages()
+    nextAndBackButtons()
 
-    var questionOneSubmit = document.getElementById('submitQuestionOne');
-    var questionCustomiseSubmit = document.getElementById('submitQuestionOneCustomise');
-    var questionTwoSubmit = document.getElementById('submitQuestionTwo');
-    var questionThreeSubmit = document.getElementById('submitQuestionThree');
+    //A function wrapper to hide pages
+    function hidingPages () {
+        var getStartedBtn = document.getElementById('getStartedBtn');
+        var logo = document.getElementById('logo');
+        var landingPage = document.getElementById('landingPage');
+        var mainAppContent = document.getElementById('mainAppContent')
 
-    //Pages and Divs
-    var landingPage = document.getElementById('landingPage');
-    var mainAppContent = document.getElementById('mainAppContent')
+        //show and hide pages event listeners
+        getStartedBtn.addEventListener('click', hideLandingPage, false);
+        logo.addEventListener('click', showLandingPage, false);
 
+        //function that hides the loading page
+        function hideLandingPage() {
+            var questionOneWrapper = document.getElementById('questionOne')
 
+            landingPage.style.display = 'none';
+            mainAppContent.style.display = 'block';
+            questionOneWrapper.style.display = 'block';
 
-    //Click event listners
-    getStartedBtn.addEventListener('click', hideLandingPage, false);
-    logo.addEventListener('click', showLandingPage,false);
+            //Invokations for functions
+            mapbox()
+            addMinusSeats()
+            addMinusDays()
+        }
 
-    questionOneSubmit.addEventListener('click', questionOneValidation, false);
-    questionCustomiseSubmit.addEventListener('click', customiseQuestionValidation, false);
-    questionTwoSubmit.addEventListener('click', questionTwoValidation, false);
-    questionThreeSubmit.addEventListener('click', questionThreeValidation, false);
+        //function that shows the loading page
+        function showLandingPage() {
+            var questionOneWrapper = document.getElementById('questionOne')
 
+            mainAppContent.style.display = 'none';
+            landingPage.style.display = 'block';
+            questionOneWrapper.style.display = 'none';
 
-    //function that hides the loading page
-    function hideLandingPage () {
-        var questionOneWrapper = document.getElementById('questionOne')
+            window.location.reload();
+        }
+    }
+    
+    //A function to hold all Event listeners
+    function nextAndBackButtons () {
+        //Next question events listeners
+        document.getElementById('submitQuestionOne').addEventListener('click', questionOneValidation, false);
+        document.getElementById('submitQuestionOneCustomise').addEventListener('click', customiseQuestionValidation, false);
+        document.getElementById('submitQuestionTwo').addEventListener('click', questionTwoValidation, false);
+        document.getElementById('submitQuestionThree').addEventListener('click', questionThreeValidation, false);
 
-        landingPage.style.display = 'none';
-        mainAppContent.style.display = 'block';
-        questionOneWrapper.style.display = 'block';
+        //Go back events listeners
+        document.getElementById('customiseBackButton').addEventListener('click', goBackToQuestionOne, false);
+        document.getElementById('questionTwoBackButton').addEventListener('click', goBackToQuestionOne, false);
+        document.getElementById('questionThreeBackButton').addEventListener('click', goBackToQuestionTwo, false);
+        document.getElementById('questionFourBackButton').addEventListener('click', goBackToQuestionThree, false);
 
-        mapbox()
-        addMinusSeats()
-        addMinusDays()
+        //Function to go back to Question one
+        function goBackToQuestionOne() {
+            document.getElementById('questionOne').style.display = 'block';
+            document.getElementById('questionTwo').style.display = 'none';
+            document.getElementById('questionOneCustomise').style.display = 'none';
+        }
 
+        //Function to go back to Question Two
+        function goBackToQuestionTwo() {
+            document.getElementById('questionTwo').style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+        }
+
+        //Function to go back to Question Three
+        function goBackToQuestionThree() {
+            document.getElementById('questionThree').style.display = 'block';
+            document.getElementById('questionFour').style.display = 'none';
+        }
     }
 
-    //function that shows the loading page
-    function showLandingPage () {
-        var questionOneWrapper = document.getElementById('questionOne')
 
-        mainAppContent.style.display = 'none';
-        landingPage.style.display = 'block';
-        questionOneWrapper.style.display = 'none';
-    }
-
-    //Adding and Minus number of seats function
+    // Adding and Minus number of seats function
     function addMinusSeats() {
         var addSeat = document.getElementById('addSeat');
         var minusSeat = document.getElementById('minusSeat');
@@ -62,7 +89,7 @@
         minusSeat.addEventListener('click', minusSeats, false);
 
         function addSeats () {
-            if (seatCount >= 0 && seatCount <= 5) {
+            if (seatCount >= 0 && seatCount <= 5){
                 seatCount ++;
                 seatQuantity.value = seatCount;
             }   
@@ -76,23 +103,24 @@
     }
 
     //Adding and Minus number of days function
-    function addMinusDays() {
-        var addDays = document.getElementById('addDays');
-        var minusDays = document.getElementById('minusDays');
+    function addMinusDays () {
+        var addDay = document.getElementById('addDays');
+        var minusDay = document.getElementById('minusDays');
         var dayQuantity = document.getElementById('dayQuantity');
         var dayCount = 0;
 
-        addDays.addEventListener('click', addDays, false);
-        minusDays.addEventListener('click', minusDays, false);
+        addDay.addEventListener('click', addDays, false);
+        minusDay.addEventListener('click', minusDays, false);
 
-        function addDays() {
-            if (dayCount >= 0 && dayCount <= 5) {
+        function addDays () {
+            if (dayCount >= 0 && dayCount <= 5){
                 dayCount ++;
                 dayQuantity.value = dayCount;
             }
         }
-        function minusDays() {
-            if (dayCount > 0 && dayCount <= 6) {
+
+        function minusDays () {
+            if (dayCount > 0 && dayCount <= 6){
                 dayCount --;
                 dayQuantity.value = dayCount;
             }
