@@ -63,74 +63,78 @@
 
 //LANDING PAGE STYLES//
 .landing-page-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    padding: 20px;
-    background-color: $primaryColor; 
-    // display: none;
-    .main-content-wrapper{
-        width: 90%;
-        height: 100%;
+    width: 100%;
+    height: 100%;
+    .landing-page-content{
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-
-        .icon-wrapper{
-            align-self: flex-end;
-            justify-content: flex-start;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            button{
-                padding: 0;
-                background-color: transparent;
-                border: none;
-                i{
-                    color: $secondaryColor;
-                    font-size: 55px;
-                    padding: 5px;
-                }
-            }
-        }
-
-        .landing-main-content{
+        width: 100vw;
+        height: 100vh;
+        padding: 20px;
+        background-color: $primaryColor; 
+        .main-content-wrapper{
+            width: 90%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            .logo{
-                width:95%;
-                padding: 15px;
+
+            .icon-wrapper{
+                align-self: flex-end;
+                justify-content: flex-start;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                button{
+                    padding: 0;
+                    background-color: transparent;
+                    border: none;
+                    i{
+                        color: $secondaryColor;
+                        font-size: 55px;
+                        padding: 5px;
+                    }
+                }
             }
-            p{
-                @include paragraphTextStyles;
-                color: $secondaryColor;
-                letter-spacing: 0.5px;
-                text-align: center;
-                padding: 15px;
+
+            .landing-main-content{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .logo{
+                    width: 70%;
+                    padding: 15px;
+                }
+                p{
+                    @include paragraphTextStyles;
+                    color: $secondaryColor;
+                    letter-spacing: 0.5px;
+                    text-align: center;
+                    padding: 15px;
+                }
+                .btn{
+                    @include boldH3TextStyles;
+                    text-transform: uppercase;
+                    background-color: $secondaryColor;
+                    color: $darkColor;
+                    width: 500px;
+                    height: 80px;
+                    border-radius: $borderRadius;
+                    padding: 15px;
+                }
             }
-            .btn{
-                @include boldH3TextStyles;
-                text-transform: uppercase;
-                background-color: $secondaryColor;
-                color: $darkColor;
-                width: 500px;
-                height: 80px;
-                border-radius: $borderRadius;
-                padding: 15px;
-            }
-        }
-    }  
+        }  
+    }
 }
 
 //MAIN APP CONTENT STYLES//
 .main-app-content{
     width: 100vw;
     height: 100vh;
+    display: none;
 
     //Header Bar Styles//
    .header-bar{
@@ -157,12 +161,22 @@
         }
     }
     //MapBox Styles//
-    #map{
+    .mapbox-wrapper{
         width: 100%;
         height: 55%;
-        background-color: $greyColor;
-    }
+        // display: none;
 
+        background-color: $greyColor;
+        #map{
+            height: 100%;  
+            padding: 0;
+            width: inherit;
+            canvas{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
     //Form Styles//
     .form-wrapper{
         width: 100%;
@@ -170,311 +184,341 @@
         background-color: $primaryColor;
 
         //Question One Styles//
-        .question-one{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
+        .question-one-wrapper{
+            display: none;
             width: 100%;
-            // display: none;
-            .btn,
-            .empty-placeholder{
-                height: 100%;
-                width: 8%;
-                border-radius: 0;
-                background-color: $lightBlueColor;
-                .fa-caret-right{
-                    font-size:140px;
-                    color: $primaryColor;
-                }
-            }
-            .question-one-content{
-                height: 100%;
-                width: 83%;
+            height: 100%;
+            .question-one{
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                flex-direction: column;
-                .section-question{
-                    @include sectionHeaderTypeStyles;
-                    padding: 5px;
-                    align-items: flex-start;
-                    justify-content: flex-start;
+                height: 100%;
+                width: 100%;
+                .btn,
+                .empty-placeholder{
+                    height: 100%;
+                    width: 8%;
+                    border-radius: 0;
+                    background-color: $lightBlueColor;
+                    .fa-caret-right{
+                        font-size:140px;
+                        color: $primaryColor;
+                    }
                 }
-                .trip-buttons-wrapper{
-                    width: 100%;
+                .question-one-content{
+                    height: 100%;
+                    width: 83%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    flex-wrap: wrap;
-                    padding-bottom: 20px;
-                    .trip-type-btn{
-                        width: 250px;
+                    flex-direction: column;
+                    .section-question{
+                        @include sectionHeaderTypeStyles;
+                        padding: 5px;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                    }
+
+                    .trip-buttons-wrapper{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        padding-bottom: 20px;
+
+                        label > input{ /* HIDE RADIO */
+                            visibility: hidden; /* Makes input not-clickable */
+                            position: absolute; /* Remove input from document flow */
+                            margin: 10px;
+                        }
+                        label > input + img{ /* IMAGE STYLES */
+                            cursor:pointer;
+                            border:2px solid transparent;
+                        }
+                        label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+                            border:3px solid $secondaryColor;
+                            border-radius: 17px;
+                            
+                        }  
+                    }   
+                    label{
+                        margin: 0;
                         height: 70px;
-                        background-color: $lightColor;
-                        @include boldH3TextStyles;
-                        color: $darkColor;
-                        border-radius: $borderRadius;
                         margin: 10px;
                     }
-                    .trip-type-btn:focus{
-                        background-color: $darkColor;
-                        color: $secondaryColor;
+                    .trip-type-image{
+                        height: 100%;
+                        
                     }
                 }
             }
         }
 
         //Question One Customise Styles//
-        .question-one-customise{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
+        .question-one-customise-wrapper{
+            display: none;
             width: 100%;
-            // display: none;
-            .btn{
-                height: 100%;
-                width: 8%;
-                border-radius: 0;
-                background-color: $lightBlueColor;
+            height: 100%;
+            .question-one-customise{
                 display: flex;
-                justify-content: space-around;
-                .fa-caret-right,
-                .fa-caret-left{
-                    font-size:130px;
-                    color: $primaryColor;
-                    margin:2.5px;
-                }
-            }
-            .question-one-customise-content{
-                height: 100%;
-                width: 83%;
-                display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                flex-direction: column;
-                .section-question{
-                    @include sectionHeaderTypeStyles;
-                    padding: 5px;
-                    align-items: flex-start;
-                    justify-content: flex-start;
-                }
-
-                
-                .select-route-wrapper{
+                height: 100%;
+                width: 100%;
+                .btn{
+                    height: 100%;
+                    width: 8%;
+                    border-radius: 0;
+                    background-color: $lightBlueColor;
                     display: flex;
-                    flex-direction: row;
-                    flex-wrap: wrap;
-                    width: 100%;
+                    justify-content: space-around;
+                    .fa-caret-right,
+                    .fa-caret-left{
+                        font-size:130px;
+                        color: $primaryColor;
+                        margin:2.5px;
+                    }
+                }
+                .question-one-customise-content{
+                    height: 100%;
+                    width: 83%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    .section-question{
+                        @include sectionHeaderTypeStyles;
+                        padding: 5px;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                    }
+                    
+                    .select-route-wrapper{
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        width: 100%;
 
-                    .start-location-wrapper,
-                    .end-location-wrapper{
-                        margin: 20px;
-                        label{
-                            font-size: 20px;
-                            font-weight: $boldFontWeight;
-                            color: $darkColor;
-                        }
-                        .rail-select {
-                            position: relative;
-                            width: 250px;
-                            
-                            select {
-                                border: solid 1px grey;
-                                border-radius: $borderRadius;
-                                font-size: 16px;
+                        .start-location-wrapper,
+                        .end-location-wrapper{
+                            margin: 20px;
+                            label{
+                                font-size: 20px;
+                                font-weight: $boldFontWeight;
                                 color: $darkColor;
-                                height: 45px;
-                                appearance: none;
-                                -moz-appearance: none;
-                                -webkit-appearance: none;
-                                box-shadow: none;
-                                
-                                &:focus {
-                                outline: none;
-                                box-shadow: none;
-                                border: solid 1px grey;
-                                }
                             }
-                            
-                            .select-arrow {
-                                &:before {
-                                content : "";
-                                position: absolute;
-                                left    : 0;
-                                bottom  : 0;
-                                height  : 100%;
-                                width   : 100px;  
-                                }
+                            .rail-select {
+                                position: relative;
+                                width: 250px;
                                 
-                                width: 40px;
-                                position: absolute;
-                                top: 0px;
-                                background-color: $lightColor;
-                                height: 100%;
-                                left: 225px;
-                                border-radius: 0px 10px 10px 0px;
-                                border-right: solid 1px gray;
-                                border-top: solid 1px gray;
-                                border-bottom: solid 1px gray;
-                                pointer-events:none;
-                            
-                                i {
-                                    & {
-                                        color: $secondaryColor;
-                                        font-size: 20px;
+                                select {
+                                    border: solid 1px grey;
+                                    border-radius: $borderRadius;
+                                    font-size: 16px;
+                                    color: $darkColor;
+                                    height: 45px;
+                                    appearance: none;
+                                    -moz-appearance: none;
+                                    -webkit-appearance: none;
+                                    box-shadow: none;
+                                    
+                                    &:focus {
+                                    outline: none;
+                                    box-shadow: none;
+                                    border: solid 1px grey;
                                     }
                                 }
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
+                                
+                                .select-arrow {
+                                    &:before {
+                                    content : "";
+                                    position: absolute;
+                                    left    : 0;
+                                    bottom  : 0;
+                                    height  : 100%;
+                                    width   : 100px;  
+                                    }
+                                    
+                                    width: 40px;
+                                    position: absolute;
+                                    top: 0px;
+                                    background-color: $lightColor;
+                                    height: 100%;
+                                    left: 225px;
+                                    border-radius: 0px 10px 10px 0px;
+                                    border-right: solid 1px gray;
+                                    border-top: solid 1px gray;
+                                    border-bottom: solid 1px gray;
+                                    pointer-events:none;
+                                
+                                    i {
+                                        & {
+                                            color: $secondaryColor;
+                                            font-size: 20px;
+                                        }
+                                    }
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
                             }
-                        }
-                    }  
+                        }  
+                    }
                 }
             }
         }
         //Question Two and Three Styles
-        .question-two,
-        .question-three{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
+        .question-two-wrapper,
+        .question-three-wrapper{
+            display: none;
             width: 100%;
-            display:none;
-            .btn{
-                height: 100%;
-                width: 8%;
-                border-radius: 0;
-                background-color: $lightBlueColor;
-                display: flex;
-                justify-content: space-around;
-                .fa-caret-right,
-                .fa-caret-left{
-                    font-size:130px;
-                    color: $primaryColor;
-                    margin:2.5px;
-                }
-            }
+            height: 100%;
             .question-two,
             .question-three{
-                height: 100%;
-                width: 83%;
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                flex-direction: column;
-                .section-question{
-                    @include sectionHeaderTypeStyles;
-                    padding: 5px;
-                    align-items: flex-start;
-                    justify-content: flex-start;
-                }
-
-                .seat-buttons-wrapper,
-                .day-buttons-wrapper{
-                    width: 100%;
-                    height: 105px;
+                height: 100%;
+                width: 100%;
+                .btn{
+                    height: 100%;
+                    width: 8%;
+                    border-radius: 0;
+                    background-color: $lightBlueColor;
                     display: flex;
-                    flex-direction: row;
+                    justify-content: space-around;
+                    .fa-caret-right,
+                    .fa-caret-left{
+                        font-size:130px;
+                        color: $primaryColor;
+                        margin:2.5px;
+                    }
+                }
+                .question-two,
+                .question-three{
+                    height: 100%;
+                    width: 83%;
+                    display: flex;
                     justify-content: center;
                     align-items: center;
-                    margin: 25px;
+                    flex-direction: column;
+                    .section-question{
+                        @include sectionHeaderTypeStyles;
+                        padding: 5px;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                    }
 
-                    .btn{
-                        background-color: $darkerBlueColor;
-                        width: 105px;
-                        height: 100%; 
-                        position: relative;
-                        i{
-                            color: $secondaryColor;
-                            font-size: 60px;
+                    .seat-buttons-wrapper,
+                    .day-buttons-wrapper{
+                        width: 100%;
+                        height: 105px;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 25px;
+
+                        .btn{
+                            background-color: $darkerBlueColor;
+                            width: 105px;
+                            height: 100%; 
+                            position: relative;
+                            i{
+                                color: $secondaryColor;
+                                font-size: 60px;
+                            }
+                        }
+
+                        .minus-btn{
+                            border-top-left-radius: $borderRadius;
+                            border-bottom-left-radius: $borderRadius;
+                        }
+                        .add-btn{
+                            border-top-right-radius: $borderRadius;
+                            border-bottom-right-radius: $borderRadius;
+                        }
+                        .plus-minus-quantity{
+                            width: 150px;
+                            height: 100%;
+                            background-color: $lightColor;
+                            
+                            input{
+                                width: 100%;
+                                height: 105px;
+                                color: $darkColor;
+                                font-weight: $boldFontWeight;
+                                font-size: 70px;
+                                text-align: center;
+                            }
                         }
                     }
 
-                    .minus-btn{
-                        border-top-left-radius: $borderRadius;
-                        border-bottom-left-radius: $borderRadius;
-                    }
-                    .add-btn{
-                        border-top-right-radius: $borderRadius;
-                        border-bottom-right-radius: $borderRadius;
-                    }
-                    .plus-minus-quantity{
-                        width: 150px;
-                        height: 100%;
-                        background-color: $lightColor;
-                        
-                        p{
-                            color: $darkColor;
-                            font-weight: $boldFontWeight;
-                            font-size: 75px;
-                            text-align: center;
-                        }
-                    }
                 }
-
             }
         }
 
         //Question Four Styles
-        .question-four{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-            width: 100%;
+        .question-four-wrapper{
             display: none;
-            .btn{
-                height: 100%;
-                width: 8%;
-                border-radius: 0;
-                background-color: $lightBlueColor;
-                display: flex;
-                justify-content: space-around;
-                .fa-caret-right,
-                .fa-caret-left{
-                    font-size:130px;
-                    color: $primaryColor;
-                    margin:2.5px;
-                }
-            }
+            width: 100%;
+            height: 100%;
             .question-four{
-                height: 100%;
-                width: 83%;
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                flex-direction: column;
-                .section-question{
-                    @include sectionHeaderTypeStyles;
-                    padding: 5px;
-                    align-items: flex-start;
-                    justify-content: flex-start;
-                }
-                .vehicle-options-wrapper{
-                    width: 95%;
-                    // height: 80%;
-                    overflow: scroll;
+                height: 100%;
+                width: 100%;
+                .btn{
+                    height: 100%;
+                    width: 8%;
+                    border-radius: 0;
+                    background-color: $lightBlueColor;
                     display: flex;
-                    flex-direction: row;
-                    .vehicle-option{
-                        border-radius: $borderRadius;
-                        background-color: $lightColor;
-                        min-width: 300px;
-                        height: 165px;
-                        margin: 10px;
-                        overflow: hidden;
+                    justify-content: space-around;
+                    .fa-caret-right,
+                    .fa-caret-left{
+                        font-size:130px;
+                        color: $primaryColor;
+                        margin:2.5px;
+                    }
+                }
+                .question-four{
+                    height: 100%;
+                    width: 83%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    .section-question{
+                        @include sectionHeaderTypeStyles;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                    }
+                    .vehicle-options-wrapper{
+                        width: 95%;
+                        overflow: scroll;
                         display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        img{
-                            height: 95%;
+                        flex-direction: row;
+                        .vehicle-option{
                             border-radius: $borderRadius;
+                            background-color: $lightColor;
+                            min-width: 295px;
+                            height: 165px;
+                            margin: 10px;
+                            overflow: hidden;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            img{
+                                height: 90%;
+                            }
+                            p{
+                                display: none;
+                            }
                         }
-                        p{
+                        .motorhome-option{
                             display: none;
                         }
                     }

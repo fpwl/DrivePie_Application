@@ -28,9 +28,6 @@
         <!-- FONT AWESOME LINK -->
         <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
 
-        <!-- JQUERY PAGE TRANSITION CSS -->
-        <link href="js/Smooth-Single-Page-Transition-Effects-Using-jQuery-CSS3-page-js/jquery.page.css" rel="stylesheet">
-
     </head>
 
     <body>
@@ -60,206 +57,236 @@
         </div>
 
         <!-- LANDING PAGE CONTENT -->
-        <div class="landing-page-wrapper page jquery-page-active" data-jquery-page-name="1" >
-            <div class="main-content-wrapper">
-                <div class="icon-wrapper">
-                    <button class="help-button" data-toggle="modal" data-target="#helpModal">
-                        <i class="fa fa-question-circle" aria-hidden="true"></i>
-                    </button>
-                </div>
-                <div class="landing-main-content">
-                    <img class="logo" src="img/logos/drivePieLogo.png" alt="drivePieLogo">
-                    <p>See the sites from the New Zealand Movie Classic, Goodbye Pork Pie</p>
-                    <button type="button" class="btn navigate" data-page-name="2" data-page-trans="flip-towards-left">Start Planning</button>
+        <div class="landing-page-wrapper"id="landingPage">
+            <div class="landing-page-content">
+                <div class="main-content-wrapper">
+                    <div class="icon-wrapper">
+                        <button class="help-button" data-toggle="modal" data-target="#helpModal">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="landing-main-content">
+                        <img class="logo" src="img/logos/DrivePieLogo.png" alt="drivePieLogo">
+                        <p>See the sites from the New Zealand Movie Classic, Goodbye Pork Pie</p>
+                        <button type="button" class="btn" id="getStartedBtn">Start Planning</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- MAIN APP CONTENT -->
-        <div class="main-app-content page jquery-page-disabled" data-jquery-page-name="2">
+        <div class="main-app-content" id="mainAppContent">
             <header class="header-bar">
-                <img class="logo" src="img/logos/drivePieLogo.png" alt="drivePieLogo">
+                <img class="logo" id="logo" src="img/logos/drivePieLogo.png" alt="drivePieLogo">
                 <button type="button" data-toggle="modal" data-target="#helpModal">
                     <i class="fa fa-question-circle" aria-hidden="true"></i>
                 </button>
             </header>
 
-            <div id='map'></div>
-
-            <div class="form-wrapper">
-                <!-- Pick a Trip Question -->
-                <div class="question-one page" data-jquery-page-name="3">
-                    <div class="empty-placeholder"></div>
-
-                    <div class="question-one-content">
-                        <h2 class="section-question">Pick a Trip</h2>
-                        <div class="btn-group trip-buttons-wrapper" role="group" aria-label="...">
-                            <button type="button" class="btn trip-type-btn" value="fullTrip">Full Trip</button>
-                            <button type="button" class="btn trip-type-btn" value="northIsland">North Island</button>
-                            <button type="button" class="btn trip-type-btn" value="southIsland">South Island</button>
-                            <button type="button" class="btn trip-type-btn" value="customise">Customise</button>
-                        </div>
-                    </div>
-
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                <!-- Choose Your Route Question -->
-                <div class="question-one-customise page" data-jquery-page-name="4">
-                    
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-left" aria-hidden="true"></i>
-                    </button>
-
-                    <div class="question-one-customise-content">
-                        <h2 class="section-question">Choose Your Route</h2>
-
-                        <div class="form-group select-route-wrapper">
-
-                            <div class="start-location-wrapper">
-                                <label for="sel1">Start Loaction:</label>
-                                <div class="rail-select">
-                                    <div class="select-arrow">
-                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                    </div>
-                                    <select class="form-control" id="sel1">
-                                        <option value="">Select a Starting Point</option>
-                                        <option value="kaitaia">Kaitaia</option>
-                                        <option value="auckland">Auckland</option>
-                                        <option value="wanganui">Wanganui</option>
-                                        <option value="wellington">Wellington</option>
-                                        <option value="greymouth">Greymouth</option>
-                                        <option value="christchurch">Christchurch</option>
-                                        <option value="queenstown">Queenstown</option>
-                                        <option value="dunedin">Dunedin</option>
-                                        <option value="invercargill">Invercargill</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="end-location-wrapper">
-                                <label for="sel2">End Loaction:</label>
-                                <div class="rail-select">
-                                    <div class="select-arrow">
-                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                    </div>
-                                    <select class="form-control" id="sel2">
-                                        <option value="">Select a End Point</option>
-                                        <option value="kaitaia">Kaitaia</option>
-                                        <option value="auckland">Auckland</option>
-                                        <option value="wanganui">Wanganui</option>
-                                        <option value="wellington">Wellington</option>
-                                        <option value="greymouth">Greymouth</option>
-                                        <option value="christchurch">Christchurch</option>
-                                        <option value="queenstown">Queenstown</option>
-                                        <option value="dunedin">Dunedin</option>
-                                        <option value="invercargill">Invercargill</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                <!-- How Many Seats Question -->
-                <div class="question-two">
-                
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-left" aria-hidden="true"></i>
-                    </button>
-                
-                    <div class="question-two">
-                        <h2 class="section-question">How many seats do you require?</h2>
-
-                        <div class="seat-buttons-wrapper">
-                            <button type="button" class="btn minus-btn" value="minus">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                            <div class="plus-minus-quantity"><p>0</p></div>
-                            <button type="button" class="btn add-btn" value="add">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                <!-- How Many Days Question -->
-                <div class="question-three">
-                
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-left" aria-hidden="true"></i>
-                    </button>
-                
-                    <div class="question-three">
-                        <h2 class="section-question">How many days will you be travelling?</h2>
-                
-                        <div class="day-buttons-wrapper">
-                            <button type="button" class="btn minus-btn" value="minus">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                            <div class="plus-minus-quantity">
-                                <p>0</p>
-                            </div>
-                            <button type="button" class="btn add-btn" value="add">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                
-                    </div>
-                
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                <!-- Select Rental Vehicle Question -->
-                <div class="question-four">
-                
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-left" aria-hidden="true"></i>
-                    </button>
-                
-                    <div class="question-four">
-                        <h2 class="section-question">Select a Rental Vehicle</h2>
-                
-                        <div class="vehicle-options-wrapper">
-                            <div class="motorbike-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
-                                <img src="img/vehicleImages/motorcycle.jpg" alt="motorbike">
-                                <p>More Info</p>
-                            </div>
-                            <div class="small-car-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
-                                <img src="img/vehicleImages/smallCar.jpg" alt="smallCar">
-                                <p>More Info</p>
-                            </div>
-                            <div class="large-car-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
-                                <img src="img/vehicleImages/largeCar.jpg" alt="largeCar">
-                                <p>More Info</p>
-                            </div>
-                            <div class="motorhome-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
-                                <img src="img/vehicleImages/motorhome.jpg" alt="motorhome">
-                                <p>More Info</p>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <button type="button" class="btn">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                    </button>
-                </div>
+            <div class="mapbox-wrapper" id="mapbox">
+                <div id='map'></div>
             </div>
-        </div>
+            
+            <form class="form-wrapper">
+                <!-- Pick a Trip Question -->
+                <div class="question-one-wrapper" id="questionOne">
+                    <div class="question-one">
+                        <div class="empty-placeholder"></div>
+                    
+                        <div class="question-one-content">
+                            <h2 class="section-question">Pick a Trip</h2>
+                    
+                            <div class="trip-buttons-wrapper">
+                                <label class="full-trip-label">
+                                    <input type="radio" id="fullTrip" name="tripType" value="fullTrip" class="setTrip" />
+                                    <img class="trip-type-image" src="img/tripTypeButtons/fullTrip.png" alt="full trip button">
+                                </label>
+                                <label class="north-island-label">
+                                    <input type="radio" id="northIsland" name="tripType" value="northIsland" class="setTrip" />
+                                    <img class="trip-type-image" src="img/tripTypeButtons/northIsland.png" alt="north island button">
+                                </label>
+                                <label class="south-island-label">
+                                    <input type="radio" id="southIsland" name="tripType" value="southIsland" class="setTrip" />
+                                    <img class="trip-type-image" src="img/tripTypeButtons/southIsland.png" alt="south island button">
+                                </label>
+                                <label class="customise-label">
+                                    <input type="radio" id="customise" name="tripType" value="customise" />
+                                    <img class="trip-type-image" src="img/tripTypeButtons/customise.png" alt="customise button">
+                                </label>
+                            </div>
+                        </div>
+                    
+                    
+                        <button type="button" id="submitQuestionOne" class="btn">
+                            <i class="fa fa-caret-right" id="nextArrowOne" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Choose Your Route Question -->
+                <div class="question-one-customise-wrapper" id="questionOneCustomise">
+                    <div class="question-one-customise">
+                    
+                        <button type="button" id="customiseBackButton"  class="btn">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                        </button>
+                    
+                        <div class="question-one-customise-content">
+                            <h2 class="section-question">Choose Your Route</h2>
+                    
+                            <div class="form-group select-route-wrapper">
+                    
+                                <div class="start-location-wrapper">
+                                    <label for="sel1">Start Loaction:</label>
+                                    <div class="rail-select">
+                                        <div class="select-arrow">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </div>
+                                        <select class="form-control" id="sel1">
+                                            <option value="">Select a Starting Point</option>
+                                            <option value="kaitaia">Kaitaia</option>
+                                            <option value="auckland">Auckland</option>
+                                            <option value="wanganui">Wanganui</option>
+                                            <option value="wellington">Wellington</option>
+                                            <option value="greymouth">Greymouth</option>
+                                            <option value="christchurch">Christchurch</option>
+                                            <option value="queenstown">Queenstown</option>
+                                            <option value="dunedin">Dunedin</option>
+                                            <option value="invercargill">Invercargill</option>
+                                        </select>
+                                    </div>
+                                </div>
+                    
+                                <div class="end-location-wrapper">
+                                    <label for="sel2">End Loaction:</label>
+                                    <div class="rail-select">
+                                        <div class="select-arrow">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </div>
+                                        <select class="form-control" id="sel2">
+                                            <option value="">Select a End Point</option>
+                                            <option value="kaitaia">Kaitaia</option>
+                                            <option value="auckland">Auckland</option>
+                                            <option value="wanganui">Wanganui</option>
+                                            <option value="wellington">Wellington</option>
+                                            <option value="greymouth">Greymouth</option>
+                                            <option value="christchurch">Christchurch</option>
+                                            <option value="queenstown">Queenstown</option>
+                                            <option value="dunedin">Dunedin</option>
+                                            <option value="invercargill">Invercargill</option>
+                                        </select>
+                                    </div>
+                                </div>
+                    
+                            </div>
+                        </div>
+                    
+                        <button type="button" id="submitQuestionOneCustomise" class="btn">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                
+                <!-- How Many Seats Question -->
+                <div class="question-two-wrapper" id="questionTwo">
+                    <div class="question-two" id="questionTwo">
+                    
+                        <button type="button" id="questionTwoBackButton" class="btn">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                        </button>
+                    
+                        <div class="question-two">
+                            <h2 class="section-question">How many seats do you require?</h2>
+                    
+                            <div class="seat-buttons-wrapper">
+                                <button type="button" id="minusSeat" class="btn minus-btn" value="minus">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                                <div class="plus-minus-quantity">
+                                    <input value="0" id="seatQuantity">
+                                </div>
+                                <button type="button" id="addSeat" class="btn add-btn" value="add">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                    
+                        </div>
+                    
+                        <button type="button" id="submitQuestionTwo" class="btn">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- How Many Days Question -->
+                <div class="question-three-wrapper" id="questionThree">
+                    <div class="question-three">
+                    
+                        <button type="button" class="btn">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                        </button>
+                    
+                        <div class="question-three">
+                            <h2 class="section-question">How many days will you be travelling?</h2>
+                    
+                            <div class="day-buttons-wrapper">
+                                <button type="button" id="minusDays" class="btn minus-btn" value="minus">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                                <div class="plus-minus-quantity">
+                                    <input value="0" id="dayQuantity">
+                                </div>
+                                <button type="button" id="addDays" class="btn add-btn" value="add">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                    
+                        </div>
+                    
+                        <button type="button" id="submitQuestionThree" class="btn">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Select Rental Vehicle Question -->
+                <div class="question-four-wrapper" id="questionFour">
+                    <div class="question-four">
+                    
+                        <button type="button" class="btn">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                        </button>
+                    
+                        <div class="question-four">
+                            <h2 class="section-question">Select a Rental Vehicle</h2>
+                    
+                            <div class="vehicle-options-wrapper">
+                                <div class="motorbike-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                    <img src="img/vehicleImages/motorcycle.jpg" alt="motorbike">
+                                    <p>More Info</p>
+                                </div>
+                                <div class="small-car-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                    <img src="img/vehicleImages/smallCar.jpg" alt="smallCar">
+                                    <p>More Info</p>
+                                </div>
+                                <div class="large-car-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                    <img src="img/vehicleImages/largeCar.jpg" alt="largeCar">
+                                    <p>More Info</p>
+                                </div>
+                                <div class="motorhome-option vehicle-option" data-toggle="modal" data-target="#vehicleInfoModal">
+                                    <img src="img/vehicleImages/motorhome.jpg" alt="motorhome">
+                                    <p>More Info</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <button type="button" class="btn">
+                            
+                        </button>
+                    </div>
+                </div>
+            </form>
 
         <!-- VEHICLE INFO MODAL -->
         <div class="modal fade vehicle-info-modal" id="vehicleInfoModal" tabindex="-1" role="dialog" aria-labelledby="vehicleInfoModalLabel" aria-hidden="true">
@@ -354,8 +381,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <!-- MapBox Script -->
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.js'></script>
-        <!-- SMOOTH PAGE TRANSITION PLUGIN -->
-        <script src="jquery.page.js"></script>
         <!-- Custom JS -->
         <script src="js/custom.js"></script>
 
