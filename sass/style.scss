@@ -233,11 +233,11 @@
                         }
                         label > input + img{ /* IMAGE STYLES */
                             cursor:pointer;
-                            border:2px solid transparent;
+                            border:4px solid transparent;
                         }
                         label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
-                            border:3px solid $secondaryColor;
-                            border-radius: 17px;
+                            border:4px solid $secondaryColor;
+                            border-radius: 20px;
                             
                         }  
                     }   
@@ -496,37 +496,42 @@
                         align-items: flex-start;
                         justify-content: flex-start;
                     }
-                    .vehicle-options-wrapper{
+                    .vehicle-options-container{
                         width: 95%;
                         overflow: scroll;
                         display: flex;
                         flex-direction: row;
-        
-                        .small-car-option,
-                        .large-car-option,
-                        .motorbike-option,
-                        .motorhome-option{
-                            display: none;
+                        
+                        .vehicle-options-wrapper{
+                            width: 100%;
+                            margin: auto;
+                            display: flex;
+                            flex-direction: row;
+                            .small-car-option,
+                            .large-car-option,
+                            .motorbike-option,
+                            .motorhome-option{
+                                display: none;
+                                .vehicle-option{
+                                    border-radius: $borderRadius;
+                                    background-color: $lightColor;
+                                    min-width: 295px;
+                                    height: 165px;
+                                    margin: 10px;
+                                    overflow: hidden;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
 
-                            .vehicle-option{
-                                border-radius: $borderRadius;
-                                background-color: $lightColor;
-                                min-width: 295px;
-                                height: 165px;
-                                margin: 10px;
-                                overflow: hidden;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                
-                                img{
-                                    height: 90%;
-                                }
-                                p{
-                                    display: none;
+                                    img{
+                                        height: 90%;
+                                    }
+                                    p{
+                                        display: none;
+                                    }
                                 }
                             }
-                        }
+                        } 
                     }
                 }
             }
