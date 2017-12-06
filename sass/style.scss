@@ -501,34 +501,31 @@
                         overflow: scroll;
                         display: flex;
                         flex-direction: row;
-                        .vehicle-option{
-                            border-radius: $borderRadius;
-                            background-color: $lightColor;
-                            min-width: 295px;
-                            height: 165px;
-                            margin: 10px;
-                            overflow: hidden;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            img{
-                                height: 90%;
-                            }
-                            p{
-                                display: none;
-                            }
-                        }
-                        .small-car-option{
-                            display: none;
-                        }
-                        .large-car-option{
-                            display: none;
-                        }
-                        .motorbike-option{
-                            display: none;
-                        }
+        
+                        .small-car-option,
+                        .large-car-option,
+                        .motorbike-option,
                         .motorhome-option{
                             display: none;
+
+                            .vehicle-option{
+                                border-radius: $borderRadius;
+                                background-color: $lightColor;
+                                min-width: 295px;
+                                height: 165px;
+                                margin: 10px;
+                                overflow: hidden;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                
+                                img{
+                                    height: 90%;
+                                }
+                                p{
+                                    display: none;
+                                }
+                            }
                         }
                     }
                 }
