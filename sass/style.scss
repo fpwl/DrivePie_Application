@@ -177,6 +177,14 @@
             }
         }
     }
+    .marker {
+        background-image: url('../img/carMarker.svg');
+        background-size: cover;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
     //Form Styles//
     .form-wrapper{
         width: 100%;
@@ -512,6 +520,7 @@
                             .motorbike-option,
                             .motorhome-option{
                                 display: none;
+                                margin: auto;
                                 .vehicle-option{
                                     border-radius: $borderRadius;
                                     background-color: $lightColor;
