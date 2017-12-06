@@ -109,23 +109,27 @@
         var dayQuantity = document.getElementById('dayQuantity');
         var dayCount = 0;
 
+        var seatQuantity = document.getElementById('seatQuantity');
+
         addDay.addEventListener('click', addDays, false);
         minusDay.addEventListener('click', minusDays, false);
 
-        function addDays () {
-            if (dayCount >= 0 && dayCount <= 5){
-                dayCount ++;
-                dayQuantity.value = dayCount;
+        
+            
+            function addDays() {
+                if (dayCount >= 0 && dayCount <= 14) {
+                    dayCount++;
+                    dayQuantity.value = dayCount;
+                }
+            }
+            function minusDays() {
+                if (dayCount > 0 && dayCount <= 15) {
+                    dayCount--;
+                    dayQuantity.value = dayCount;
+                }
             }
         }
 
-        function minusDays () {
-            if (dayCount > 0 && dayCount <= 6){
-                dayCount --;
-                dayQuantity.value = dayCount;
-            }
-        }
-    }
 
     //Validating Question One
     function questionOneValidation () {
@@ -149,7 +153,7 @@
     }
 
     //Validating Question One Customise
-    function customiseQuestionValidation(params) {
+    function customiseQuestionValidation () {
         var startingPointSelect = document.getElementById('sel1');
         var endingPointSelect = document.getElementById('sel2');
 
@@ -176,18 +180,70 @@
     }
 
     //Validating Question Three 
-    function questionThreeValidation() {
-        var dayQuantity = document.getElementById('dayQuantity');
+    //Taking seat and day quantity to determine what vehicles will be displayed in question four
+    function questionThreeValidation () {
+        var dayQuantity = document.getElementById('dayQuantity').value;
+        var seatQuantity = document.getElementById('seatQuantity').value;
 
-        if (dayQuantity.value > 0) {
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
+        //Vehicle option variables
+        var motorbike = document.getElementById('motorbike');
+        var smallCar = document.getElementById('smallCar');
+        var largeCar = document.getElementById('largeCar');
+        var motorhome = document.getElementById('motorhome');
+
+        showLargeCar()
+        showMotorbike()
+        showMotorhome()
+        showSmallCar()
+
+        function showMotorbike () {
+            if (seatQuantity == 1 && (dayQuantity > 0 && dayQuantity <= 5)){
+                motorbike.style.display = 'block';
+                document.getElementById('questionThree').style.display = 'none';
+                document.getElementById('questionFour').style.display = 'block';
+            }
+            else{
+                motorbike.style.display = 'none';
+                console.log('motorbike hidden')
+            }
         }
-        else {
-            console.log('add some days');
+
+        function showSmallCar () {
+            if ((seatQuantity > 0 && seatQuantity <= 2) && (dayQuantity > 0 && dayQuantity <= 10)){
+                smallCar.style.display = 'block';
+                document.getElementById('questionThree').style.display = 'none';
+                document.getElementById('questionFour').style.display = 'block';
+            }
+            else {
+                smallCar.style.display = 'none';
+                console.log('Small Car hidden')
+            }
+        }
+
+        function showLargeCar () {
+            if ((seatQuantity > 0 && seatQuantity <= 5) && (dayQuantity >=3 && dayQuantity <= 10)){
+                largeCar.style.display = 'block';
+                document.getElementById('questionThree').style.display = 'none';
+                document.getElementById('questionFour').style.display = 'block';
+            }
+            else{
+                largeCar.style.display = 'none';
+                console.log('Large Car hidden')
+            }
+        }
+
+        function showMotorhome () {
+            if ((seatQuantity >= 2 && seatQuantity <= 6) && (dayQuantity >= 2 && dayQuantity <= 15)) {
+                motorhome.style.display = 'block';
+                document.getElementById('questionThree').style.display = 'none';
+                document.getElementById('questionFour').style.display = 'block';
+            }
+            else {
+                motorhome.style.display = 'none';
+                console.log('Motohome hidden')
+            }
         }
     }
-
 
     //Map Box js stuff
     function mapbox() {
