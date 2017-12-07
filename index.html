@@ -97,19 +97,19 @@
                             <h2 class="section-question">Pick a Trip</h2>
                     
                             <div class="trip-buttons-wrapper">
-                                <label class="full-trip-label">
+                                <label class="full-trip-label" data-filter="fullTrip">
                                     <input type="radio" id="fullTrip" name="tripType" value="fullTrip" class="setTrip" />
                                     <img class="trip-type-image" src="img/tripTypeButtons/fullTrip.png" alt="full trip button">
                                 </label>
-                                <label class="north-island-label">
+                                <label class="north-island-label" data-filter="northIsland">
                                     <input type="radio" id="northIsland" name="tripType" value="northIsland" class="setTrip" />
                                     <img class="trip-type-image" src="img/tripTypeButtons/northIsland.png" alt="north island button">
                                 </label>
-                                <label class="south-island-label">
+                                <label class="south-island-label" data-filter="southIsland">
                                     <input type="radio" id="southIsland" name="tripType" value="southIsland" class="setTrip" />
                                     <img class="trip-type-image" src="img/tripTypeButtons/southIsland.png" alt="south island button">
                                 </label>
-                                <label class="customise-label">
+                                <label class="customise-label active" data-filter="all">
                                     <input type="radio" id="customise" name="tripType" value="customise" />
                                     <img class="trip-type-image" src="img/tripTypeButtons/customise.png" alt="customise button">
                                 </label>
@@ -146,6 +146,7 @@
                                             <option value="">Select a Starting Point</option>
                                             <option value="kaitaia">Kaitaia</option>
                                             <option value="auckland">Auckland</option>
+                                            <option value="waikato">Waikato</option>
                                             <option value="wanganui">Wanganui</option>
                                             <option value="wellington">Wellington</option>
                                             <option value="greymouth">Greymouth</option>
@@ -167,6 +168,7 @@
                                             <option value="">Select a End Point</option>
                                             <option value="kaitaia">Kaitaia</option>
                                             <option value="auckland">Auckland</option>
+                                            <option value="waikato">Waikato</option>
                                             <option value="wanganui">Wanganui</option>
                                             <option value="wellington">Wellington</option>
                                             <option value="greymouth">Greymouth</option>
@@ -310,7 +312,7 @@
                     </div>
                     <div class="modal-body vehicle-info-modal-body">
                         <div class="vehicle-image-wrapper">
-                            <img src="img/vehicleImages/largeCar.jpg" alt="vehicleImage">
+                            <img id="vehicleImage" src="img/vehicleImages/largeCar.jpg" alt="vehicleImage">
                         </div>
                         <div class="rental-info-wrapper">
                             <!-- TRIP COST CONTAINER -->
@@ -320,7 +322,7 @@
                                 </div>
                                 <div class="travel-distance">
                                     <p>Travel Distance:</p>
-                                    <p class="trip-cost-value" id="traveDistance">km</p>
+                                    <p class="trip-cost-value" id="travelDistance">km</p>
                                 </div>
                                 <div class="number-of-people">
                                     <p>No. of People:</p>
@@ -375,7 +377,7 @@
                             </div>
 
                             <div class="rental-info-button-wrapper">
-                                <button type="button" class="btn" data-dismiss="modal" aria-label="Close">New Search</button>
+                                <button type="button" class="btn" id="newSearch">New Search</button>
                                 <button type="button" class="btn close-btn" data-dismiss="modal" aria-label="Close">Close</button>
                             </div>
                         </div>

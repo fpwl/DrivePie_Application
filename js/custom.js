@@ -8,14 +8,13 @@
 
     //A function wrapper to hide pages
     function hidingPages () {
-        var getStartedBtn = document.getElementById('getStartedBtn');
-        var logo = document.getElementById('logo');
         var landingPage = document.getElementById('landingPage');
         var mainAppContent = document.getElementById('mainAppContent')
 
         //show and hide pages event listeners
-        getStartedBtn.addEventListener('click', hideLandingPage, false);
-        logo.addEventListener('click', showLandingPage, false);
+        document.getElementById('getStartedBtn').addEventListener('click', hideLandingPage, false);
+        document.getElementById('logo').addEventListener('click', showLandingPage, false);
+        document.getElementById('newSearch').addEventListener('click', showLandingPage, false);
 
         //function that hides the loading page
         function hideLandingPage() {
@@ -127,6 +126,23 @@
         }
      }
 
+     //Make customise route selection to not have same data in start and end location
+    $('select').change(function () {
+        var ary = new Array();
+        $('select option:selected').each(function () {
+            if ($(this).val().length > 0) {
+                ary.push($(this).val());
+            }
+        });
+        $('select option').each(function () {
+            if ($.inArray($(this).val(), ary) > -1) {
+                $(this).attr('disabled', 'disabled');
+            } else {
+                $(this).removeAttr('disabled');
+            }
+        });
+    });
+
 //____________________________________________________________________________________________________//
 
     //Valiadtion JS for the valiadtion of the form questions
@@ -142,6 +158,7 @@
         if (customiseButton.checked) {
             document.getElementById('questionOne').style.display = 'none';
             document.getElementById('questionOneCustomise').style.display = 'block';
+
         }
         else if (fullTrip.checked || southIsland.checked || northIsland.checked) {
             document.getElementById('questionOne').style.display = 'none';
@@ -201,8 +218,6 @@
                 motorbike.style.display = 'block';
                 document.getElementById('questionThree').style.display = 'none';
                 document.getElementById('questionFour').style.display = 'block';
-
-                vehicleModalData()
             }
             else {
                 motorbike.style.display = 'none';
@@ -247,33 +262,7 @@
         }
     }
 
-//_________________________________________________________________________________________________________//
-
-    //Vehicle option modal data function
-    function vehicleModalData () {
-        var dayQuantity = document.getElementById('dayQuantity').value;
-        var seatQuantity = document.getElementById('seatQuantity').value;
-
-        var startingPointSelect = document.getElementById('sel1');
-        var endingPointSelect = document.getElementById('sel2');
-
-        var northIsland = document.getElementById('northIsland');
-        var southIsland = document.getElementById('southIsland');
-        var fullTrip = document.getElementById('fullTrip');
-
-        var motorbike = document.getElementById('motorbike');
-        var smallCar = document.getElementById('smallCar');
-        var largeCar = document.getElementById('largeCar');
-        var motorhome = document.getElementById('motorhome');
-
-        motorbike.addEventListener('click', motorbikeModalData, false);
-
-        // function motorbikeModalData () {
-            
-        // }
-    }
-
-//__________________________________________________________________________________________________________//
+//____________________________________________________________________________________________________//
 
     //custom js for mapbox styles
 
@@ -285,129 +274,577 @@
             container: 'map', // container id
             style: 'mapbox://styles/fpwl/cjan5kfxmeaq02smsehvd41aa', // stylesheet location
             center: [174.8860, -40.9006], // starting position [lng, lat]
-            zoom: 4 // starting zoom 
+            zoom: 4.2 // starting zoom 
         });
 
-        
+        //Hide and show mapbox markers
+        document.getElementById('northIsland').addEventListener('click', showNorthIslandMarkers, false);
+        document.getElementById('southIsland').addEventListener('click', showSouthIslandMarkers, false);
+        document.getElementById('fullTrip').addEventListener('click', showFullTripMarkers, false);
+        document.getElementById('customise').addEventListener('click', customiseMarkers, false);
 
-        document.getElementById('northIsland').addEventListener('click', showMarkers, false);
-        document.getElementById('southIsland').addEventListener('click', showMarkers, false);
-        document.getElementById('fullTrip').addEventListener('click', showMarkers, false);
+        function showNorthIslandMarkers () {
+            northIslandData.features.forEach(function (marker) {
+                // create a HTML element for each feature
+                var el = document.createElement('div');
+                el.className = 'marker northMark';
 
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(marker.geometry.coordinates)
+                    .addTo(map);
+            });
 
+            // document.getElementsByClassName('southMark'[0]).style.displ;
+            $('.southMark').hide();
+        }
 
-        function showMarkers () {
-            if (document.getElementById('fullTrip').checked) {
-                northIslandData.features.forEach(function (marker) {
-                    // create a HTML element for each feature
+        function showSouthIslandMarkers () {
+            southIslandData.features.forEach(function (marker) {
+                // create a HTML element for each feature
+                var el = document.createElement('div');
+                el.className = 'marker southMark';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(marker.geometry.coordinates)
+                    .addTo(map);
+            });
+
+            $('.northMark').hide();
+        }
+
+        function showFullTripMarkers () {
+            northIslandData.features.forEach(function (marker) {
+                // create a HTML element for each feature
+                var el = document.createElement('div');
+                el.className = 'marker northMark';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(marker.geometry.coordinates)
+                    .addTo(map);
+            });
+            southIslandData.features.forEach(function (marker) {
+                // create a HTML element for each feature
+                var el = document.createElement('div');
+                el.className = 'marker southMark';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(marker.geometry.coordinates)
+                    .addTo(map);
+            });
+        }
+
+        function customiseMarkers () {
+            $('.northMark').hide();
+            $('.southMark').hide();
+        }
+
+        //Grabing customise select values
+        $('#sel1').on('change', function () {
+            var startLoactionValue = document.getElementById('sel1').value;
+
+                //Individual markers for customise section
+                if (startLoactionValue == 'kaitaia') {
                     var el = document.createElement('div');
-                    el.className = 'marker';
+                    el.className = 'marker kaitaiaMark';
 
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
-                        .setLngLat(marker.geometry.coordinates)
+                        .setLngLat(northIslandData.features[0].geometry.coordinates)
                         .addTo(map);
-                });
-                southIslandData.features.forEach(function (marker) {
-                    // create a HTML element for each feature
+
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                    
+                }
+                if (startLoactionValue == 'auckland') {
                     var el = document.createElement('div');
-                    el.className = 'marker';
+                    el.className = 'marker aucklandMark';
 
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
-                        .setLngLat(marker.geometry.coordinates)
+                        .setLngLat(northIslandData.features[1].geometry.coordinates)
                         .addTo(map);
-                });
-            }
-            else if (document.getElementById('northIsland').checked) {
-                northIslandData.features.forEach(function (marker) {
-                    // create a HTML element for each feature
+                    
+                    $('.kaitaiaMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'waikato') {
                     var el = document.createElement('div');
-                    el.className = 'marker';
+                    el.className = 'marker waikatoMark';
 
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
-                        .setLngLat(marker.geometry.coordinates)
+                        .setLngLat(northIslandData.features[2].geometry.coordinates)
                         .addTo(map);
-                });
-            }
-            else if (document.getElementById('southIsland').checked) {
-                southIslandData.features.forEach(function (marker) {
-                    // create a HTML element for each feature
+
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'wanganui') {
                     var el = document.createElement('div');
-                    el.className = 'marker';
+                    el.className = 'marker wanganuiMark';
 
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
-                        .setLngLat(marker.geometry.coordinates)
+                        .setLngLat(northIslandData.features[3].geometry.coordinates)
                         .addTo(map);
-                });
-            }
-            else if (document.getElementById('customise').checked) {
-                document.getElementById('nextArrowOne').style.color = '#ffdd12';
-            }
 
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'wellington') {
+                    var el = document.createElement('div');
+                    el.className = 'marker wellingtonMark';
+
+                    // make a marker for each feature and add to the map
+                    new mapboxgl.Marker(el)
+                        .setLngLat(northIslandData.features[4].geometry.coordinates)
+                        .addTo(map);
+
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'greymouth') {
+                    var el = document.createElement('div');
+                    el.className = 'marker greymouthMark';
+
+                    // make a marker for each feature and add to the map
+                    new mapboxgl.Marker(el)
+                        .setLngLat(southIslandData.features[0].geometry.coordinates)
+                        .addTo(map);
+                    
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'christchurch') {
+                    var el = document.createElement('div');
+                    el.className = 'marker christchurchMark';
+
+                    // make a marker for each feature and add to the map
+                    new mapboxgl.Marker(el)
+                        .setLngLat(southIslandData.features[1].geometry.coordinates)
+                        .addTo(map);
+
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'queenstown') {
+                    var el = document.createElement('div');
+                    el.className = 'marker queenstownMark';
+
+                    // make a marker for each feature and add to the map
+                    new mapboxgl.Marker(el)
+                        .setLngLat(southIslandData.features[2].geometry.coordinates)
+                        .addTo(map);
+
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'dunedin') {
+                    var el = document.createElement('div');
+                    el.className = 'marker dunedinMark';
+
+                    // make a marker for each feature and add to the map
+                    new mapboxgl.Marker(el)
+                        .setLngLat(southIslandData.features[3].geometry.coordinates)
+                        .addTo(map);
+                    
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.invercargillMark').hide();
+                }
+                if (startLoactionValue == 'invercargill') {
+                    var el = document.createElement('div');
+                    el.className = 'marker invercargillMark';
+
+                    // make a marker for each feature and add to the map
+                    new mapboxgl.Marker(el)
+                        .setLngLat(southIslandData.features[4].geometry.coordinates)
+                        .addTo(map);
+
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                }
+                if(startLoactionValue == '') {
+                    $('.kaitaiaMark').hide();
+                    $('.aucklandMark').hide();
+                    $('.waikatoMark').hide();
+                    $('.wanganuiMark').hide();
+                    $('.wellingtonMark').hide();
+                    $('.greymouthMark').hide();
+                    $('.christchurchMark').hide();
+                    $('.queenstownMark').hide();
+                    $('.dunedinMark').hide();
+                    $('.invercargillMark').hide();
+                }
+        })
+
+        $('#sel2').on('change', function () {
+            var endLoactionValue = document.getElementById('sel2').value;
+
+            //Individual markers for customise section
+            if (endLoactionValue == 'kaitaia') {
+                var el = document.createElement('div');
+                el.className = 'marker kaitaiaMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(northIslandData.features[0].geometry.coordinates)
+                    .addTo(map);
+
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+
+            }
+            if (endLoactionValue == 'auckland') {
+                var el = document.createElement('div');
+                el.className = 'marker aucklandMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(northIslandData.features[1].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'waikato') {
+                var el = document.createElement('div');
+                el.className = 'marker waikatoMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(northIslandData.features[2].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'wanganui') {
+                var el = document.createElement('div');
+                el.className = 'marker wanganuiMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(northIslandData.features[3].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'wellington') {
+                var el = document.createElement('div');
+                el.className = 'marker wellingtonMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(northIslandData.features[4].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'greymouth') {
+                var el = document.createElement('div');
+                el.className = 'marker greymouthMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(southIslandData.features[0].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'christchurch') {
+                var el = document.createElement('div');
+                el.className = 'marker christchurchMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(southIslandData.features[1].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'queenstown') {
+                var el = document.createElement('div');
+                el.className = 'marker queenstownMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(southIslandData.features[2].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'dunedin') {
+                var el = document.createElement('div');
+                el.className = 'marker dunedinMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(southIslandData.features[3].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+            if (endLoactionValue == 'invercargill') {
+                var el = document.createElement('div');
+                el.className = 'marker invercargillMarkEnd';
+
+                // make a marker for each feature and add to the map
+                new mapboxgl.Marker(el)
+                    .setLngLat(southIslandData.features[4].geometry.coordinates)
+                    .addTo(map);
+
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+            }
+            if (endLoactionValue == '') {
+                $('.kaitaiaMarkEnd').hide();
+                $('.aucklandMarkEnd').hide();
+                $('.waikatoMarkEnd').hide();
+                $('.wanganuiMarkEnd').hide();
+                $('.wellingtonMarkEnd').hide();
+                $('.greymouthMarkEnd').hide();
+                $('.christchurchMarkEnd').hide();
+                $('.queenstownMarkEnd').hide();
+                $('.dunedinMarkEnd').hide();
+                $('.invercargillMarkEnd').hide();
+            }
+        })
+    }
+
+//____________________________________________________________________________________________________//
+
+    //Vehicle Option Modal Functions
+    //Vehicle option variables
+    var motorbike = document.getElementById('motorbike');
+    var smallCar = document.getElementById('smallCar');
+    var largeCar = document.getElementById('largeCar');
+    var motorhome = document.getElementById('motorhome');
+    var vehicleNameHeader = document.getElementById('vehicleInfoModalLabel');
+    var vehicleImage = document.getElementById('vehicleImage');
+    var travelLength = document.getElementById('numberOfDays');
+    var dayQuantity = document.getElementById('dayQuantity');
+    var amountOfSeats = document.getElementById('numberOfPeople');
+    var seatQuantity = document.getElementById('seatQuantity');
+    var travelDistancePrint = document.getElementById('travelDistance'); 
+
+    motorbike.addEventListener('click', motorbikeInfoModal, false);
+    smallCar.addEventListener('click', smallCarInfoModal, false);
+    largeCar.addEventListener('click', largeCarInfoModal, false);
+    motorhome.addEventListener('click', motorhomeInfoModal, false);
+
+    function motorbikeInfoModal () {
+        vehicleNameHeader.textContent = "TRIUMPH DAYTONA 650";
+        vehicleImage.src = "img/vehicleImages/motorcycle.jpg";
+        grabPreCalculatedDistance()
+        travelLength.textContent = dayQuantity.value + ' days';
+        amountOfSeats.textContent = seatQuantity.value + ' people';
+    }
+
+    function smallCarInfoModal () {
+        vehicleNameHeader.textContent = "2008 SMART FORTWO";
+        vehicleImage.src = "img/vehicleImages/smallCar.jpg";
+        grabPreCalculatedDistance()
+        travelLength.textContent = dayQuantity.value + ' days';
+        amountOfSeats.textContent = seatQuantity.value + ' people';
+    }
+
+    function largeCarInfoModal() {
+        vehicleNameHeader.textContent = "MINI COOPER S 3-DOOR HATCH";
+        vehicleImage.src = "img/vehicleImages/largeCar.jpg";
+        grabPreCalculatedDistance()
+        travelLength.textContent = dayQuantity.value + ' days';
+        amountOfSeats.textContent = seatQuantity.value + ' people';
+    }
+
+    function motorhomeInfoModal() {
+        vehicleNameHeader.textContent = "VOLKSWAGEN CAMPER VAN";
+        vehicleImage.src = "img/vehicleImages/motorhome.jpg";
+        grabPreCalculatedDistance()
+        travelLength.textContent = dayQuantity.value + ' days';
+        amountOfSeats.textContent = seatQuantity.value + ' people';
+    }
+
+    var customiseButton = document.getElementById('customise');
+    var northIsland = document.getElementById('northIsland');
+    var southIsland = document.getElementById('southIsland');
+    var fullTrip = document.getElementById('fullTrip');
+
+    var fullTripDistance = 2500;
+    var northIslandDistance = 978;
+    var southIslandDistance = 1071;
+
+    // console.dir(travelDistance.value);
+
+    function grabPreCalculatedDistance () {
+        if (fullTrip.checked) {
+            var travelDistance = fullTripDistance;
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if (northIsland.checked) {
+            var travelDistance = northIslandDistance;
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if (southIsland.checked) {
+            var travelDistance = southIslandDistance;
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if (customiseButton.checked) {
+            var travelDistance = 'TBD';
+            travelDistancePrint.textContent = travelDistance + ' km';
         }
     }
-        
-        // document.getElementById('northIsland').addEventListener('click', northHalfMarkers, false);
-        // document.getElementById('southIsland').addEventListener('click', southHalfMarkers, false);
-        // document.getElementById('fullTrip').addEventListener('click', fullTripMarkers, false);
-
-        //functions to add mapbox markers to map
-    //     function fullTripMarkers() {
-    //         // add markers to map
-    //         northIslandData.features.forEach(function (marker) {
-    //             // create a HTML element for each feature
-    //             var el = document.createElement('div');
-    //             el.className = 'marker';
-
-    //             // make a marker for each feature and add to the map
-    //             new mapboxgl.Marker(el)
-    //                 .setLngLat(marker.geometry.coordinates)
-    //                 .addTo(map);
-    //         });
-    //         southIslandData.features.forEach(function (marker) {
-    //             // create a HTML element for each feature
-    //             var el = document.createElement('div');
-    //             el.className = 'marker';
-
-    //             // make a marker for each feature and add to the map
-    //             new mapboxgl.Marker(el)
-    //                 .setLngLat(marker.geometry.coordinates)
-    //                 .addTo(map);
-    //         });
-    //     }
-
-    //     function northHalfMarkers() {
-    //         // add markers to map
-    //         northIslandData.features.forEach(function (marker) {
-    //             // create a HTML element for each feature
-    //             var el = document.createElement('div');
-    //             el.className = 'marker';
-
-    //             // make a marker for each feature and add to the map
-    //             new mapboxgl.Marker(el)
-    //                 .setLngLat(marker.geometry.coordinates)
-    //                 .addTo(map);
-    //         });
-    //     }
-
-    //     function southHalfMarkers() {
-    //         // add markers to map
-    //         southIslandData.features.forEach(function (marker) {
-    //             // create a HTML element for each feature
-    //             var el = document.createElement('div');
-    //             el.className = 'marker';
-
-    //             // make a marker for each feature and add to the map
-    //             new mapboxgl.Marker(el)
-    //                 .setLngLat(marker.geometry.coordinates)
-    //                 .addTo(map);
-    //         });
-    //     }
-    // }
-
+    
 
 })();
 

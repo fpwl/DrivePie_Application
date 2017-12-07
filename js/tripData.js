@@ -49,7 +49,7 @@ var northIslandData = {
         type: 'Feature',
         geometry: {
             type: 'Point',
-            coordinates: [174.7762, -41.2865]
+            coordinates: [174.780354, -41.278077]
         },
         properties: {
             title: 'Mapbox',
@@ -117,3 +117,4 @@ var southIslandData = {
         }
     }]
 };
+
