@@ -164,9 +164,6 @@
             document.getElementById('questionOne').style.display = 'none';
             document.getElementById('questionTwo').style.display = 'block';
         }
-        else {
-            console.log('choose something');
-        }
     }
 
     //Validating Question One Customise
@@ -178,9 +175,6 @@
             document.getElementById('questionOneCustomise').style.display = 'none';
             document.getElementById('questionTwo').style.display = 'block';
         }
-        else {
-            console.log('choose something please');
-        }
     }
 
     //Validating Question Two 
@@ -190,9 +184,6 @@
         if (seatQuantity.value > 0) {
             document.getElementById('questionTwo').style.display = 'none';
             document.getElementById('questionThree').style.display = 'block';
-        }
-        else {
-            console.log('add some seats');
         }
     }
 
@@ -221,7 +212,6 @@
             }
             else {
                 motorbike.style.display = 'none';
-                console.log('motorbike hidden')
             }
         }
 
@@ -233,7 +223,6 @@
             }
             else {
                 smallCar.style.display = 'none';
-                console.log('Small Car hidden')
             }
         }
 
@@ -245,7 +234,6 @@
             }
             else {
                 largeCar.style.display = 'none';
-                console.log('Large Car hidden')
             }
         }
 
@@ -257,7 +245,6 @@
             }
             else {
                 motorhome.style.display = 'none';
-                console.log('Motohome hidden')
             }
         }
     }
@@ -776,74 +763,160 @@
     var dayQuantity = document.getElementById('dayQuantity');
     var amountOfSeats = document.getElementById('numberOfPeople');
     var seatQuantity = document.getElementById('seatQuantity');
-    var travelDistancePrint = document.getElementById('travelDistance'); 
+    var rentalPrice = document.getElementById('rentalPrice');
+    var rentalPriceEquation = document.getElementById('rentalPriceCalculation');
+    var fuelCost = document.getElementById('fuelCost');
+    var fuelCostEquation = document.getElementById('fuelCostCalculation');
+    var totalCost = document.getElementById('totalCost');
+
 
     motorbike.addEventListener('click', motorbikeInfoModal, false);
     smallCar.addEventListener('click', smallCarInfoModal, false);
     largeCar.addEventListener('click', largeCarInfoModal, false);
     motorhome.addEventListener('click', motorhomeInfoModal, false);
-
+    
     function motorbikeInfoModal () {
+        var motorbikeRentalPriceArray = [];
+        var motorbikeFuelCostArray = [];
+
         vehicleNameHeader.textContent = "TRIUMPH DAYTONA 650";
         vehicleImage.src = "img/vehicleImages/motorcycle.jpg";
         grabPreCalculatedDistance()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
-    }
 
+        var totalRentalPrice = (dayQuantity.value * 109).toFixed(2);
+        rentalPrice.textContent = '$' + totalRentalPrice;
+        motorbikeRentalPriceArray.push(totalRentalPrice);
+        rentalPriceEquation.textContent = '($109.00/day x ' + dayQuantity.value + ')';
+        
+        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 3.7) * 1.98).toFixed(2);
+        fuelCost.textContent = '$' + estimatedFuelCost;
+        motorbikeFuelCostArray.push(estimatedFuelCost);
+        fuelCostEquation.textContent = '($1.98/L x 3.7L/100km for ' + travelDistanceValue[0] + 'km)';
+
+        var rentalPriceValue = Number(motorbikeRentalPriceArray[0]);
+        var fuelCostValue = Number(motorbikeFuelCostArray[0]);
+        var totalCostValue = rentalPriceValue + fuelCostValue;
+        totalCost.textContent = '$' + totalCostValue;
+
+    }
+        // totalCost.textContent = '$' + Math.round(totalEstimateCost * 100) / 100;
     function smallCarInfoModal () {
+        var smallCarRentalPriceArray = [];
+        var smallCarFuelCostArray = [];
+
         vehicleNameHeader.textContent = "2008 SMART FORTWO";
         vehicleImage.src = "img/vehicleImages/smallCar.jpg";
         grabPreCalculatedDistance()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
+
+        totalRentalPrice = (dayQuantity.value * 129).toFixed(2);
+        rentalPrice.textContent = '$' + totalRentalPrice;
+        smallCarRentalPriceArray.push(totalRentalPrice);
+        rentalPriceEquation.textContent = '($129.00/day x ' + dayQuantity.value + ')';
+
+        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 8.5) * 1.98).toFixed(2);
+        fuelCost.textContent = '$' + estimatedFuelCost;
+        smallCarFuelCostArray.push(estimatedFuelCost);
+        fuelCostEquation.textContent = '($1.98/L x 8.5L/100km for ' + travelDistanceValue[0] + 'km)';
+
+        var rentalPriceValue = Number(smallCarRentalPriceArray[0]);
+        var fuelCostValue = Number(smallCarFuelCostArray[0]);
+        var totalCostValue = rentalPriceValue + fuelCostValue;
     }
 
     function largeCarInfoModal() {
+        var largeCarRentalPriceArray = [];
+        var largeCarFuelCostArray = [];
+
         vehicleNameHeader.textContent = "MINI COOPER S 3-DOOR HATCH";
         vehicleImage.src = "img/vehicleImages/largeCar.jpg";
         grabPreCalculatedDistance()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
+
+        totalRentalPrice = (dayQuantity.value * 144).toFixed(2);
+        rentalPrice.textContent = '$' + totalRentalPrice;
+        largeCarRentalPriceArray.push(totalRentalPrice);
+        rentalPriceEquation.textContent = '($144.00/day x ' + dayQuantity.value + ')';
+
+        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 9.7) * 1.98).toFixed(2);
+        fuelCost.textContent = '$' + estimatedFuelCost;
+        largeCarFuelCostArray.push(estimatedFuelCost);
+        fuelCostEquation.textContent = '($1.98/L x 9.7L/100km for ' + travelDistanceValue[0] + 'km)';
+
+        var rentalPriceValue = Number(largeCarRentalPriceArray[0]);
+        var fuelCostValue = Number(largeCarFuelCostArray[0]);
+        var totalCostValue = rentalPriceValue + fuelCostValue;
+        totalCost.textContent = '$' + totalCostValue;
     }
 
     function motorhomeInfoModal() {
+        var motorhomeRentalPriceArray = [];
+        var motorhomeFuelCostArray = [];
+
         vehicleNameHeader.textContent = "VOLKSWAGEN CAMPER VAN";
         vehicleImage.src = "img/vehicleImages/motorhome.jpg";
         grabPreCalculatedDistance()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
+
+        totalRentalPrice = (dayQuantity.value * 200).toFixed(2);
+        rentalPrice.textContent = '$' + totalRentalPrice;
+        motorhomeRentalPriceArray.push(totalRentalPrice);
+        rentalPriceEquation.textContent = '($200.00/day x ' + dayQuantity.value + ')';
+
+        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 17) * 1.98).toFixed(2);
+        fuelCost.textContent = '$' + estimatedFuelCost;
+        motorhomeFuelCostArray.push(estimatedFuelCost);
+        fuelCostEquation.textContent = '($1.98/L x 17L/100km for ' + travelDistanceValue[0] + 'km)';
+
+        var rentalPriceValue = Number(motorhomeRentalPriceArray[0]);
+        var fuelCostValue = Number(motorhomeFuelCostArray[0]);
+        var totalCostValue = rentalPriceValue + fuelCostValue;
+        totalCost.textContent = '$' + totalCostValue;
     }
 
     var customiseButton = document.getElementById('customise');
     var northIsland = document.getElementById('northIsland');
     var southIsland = document.getElementById('southIsland');
     var fullTrip = document.getElementById('fullTrip');
+    var travelDistancePrint = document.getElementById('travelDistance');
 
     var fullTripDistance = 2500;
     var northIslandDistance = 978;
     var southIslandDistance = 1071;
 
-    // console.dir(travelDistance.value);
+    var travelDistanceValue = [];
+    
 
     function grabPreCalculatedDistance () {
         if (fullTrip.checked) {
             var travelDistance = fullTripDistance;
+            travelDistanceValue.push(travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (northIsland.checked) {
             var travelDistance = northIslandDistance;
+            travelDistanceValue.push(travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (southIsland.checked) {
             var travelDistance = southIslandDistance;
+            travelDistanceValue.push(travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (customiseButton.checked) {
             var travelDistance = 'TBD';
+            travelDistanceValue.push(travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
     }
+
+    
+
     
 
 })();
