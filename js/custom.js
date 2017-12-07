@@ -768,6 +768,8 @@
     var fuelCost = document.getElementById('fuelCost');
     var fuelCostEquation = document.getElementById('fuelCostCalculation');
     var totalCost = document.getElementById('totalCost');
+    var startingPointSelect = document.getElementById('sel1');
+    var endingPointSelect = document.getElementById('sel2');
 
 
     motorbike.addEventListener('click', motorbikeInfoModal, false);
@@ -782,6 +784,7 @@
         vehicleNameHeader.textContent = "TRIUMPH DAYTONA 650";
         vehicleImage.src = "img/vehicleImages/motorcycle.jpg";
         grabPreCalculatedDistance()
+        // customisedDistanceValues()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
 
@@ -797,18 +800,18 @@
 
         var rentalPriceValue = Number(motorbikeRentalPriceArray[0]);
         var fuelCostValue = Number(motorbikeFuelCostArray[0]);
-        var totalCostValue = rentalPriceValue + fuelCostValue;
+        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
         totalCost.textContent = '$' + totalCostValue;
-
     }
-        // totalCost.textContent = '$' + Math.round(totalEstimateCost * 100) / 100;
+
     function smallCarInfoModal () {
         var smallCarRentalPriceArray = [];
         var smallCarFuelCostArray = [];
-
+        
         vehicleNameHeader.textContent = "2008 SMART FORTWO";
         vehicleImage.src = "img/vehicleImages/smallCar.jpg";
         grabPreCalculatedDistance()
+        // customisedDistanceValues()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
 
@@ -824,7 +827,8 @@
 
         var rentalPriceValue = Number(smallCarRentalPriceArray[0]);
         var fuelCostValue = Number(smallCarFuelCostArray[0]);
-        var totalCostValue = rentalPriceValue + fuelCostValue;
+        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
+        totalCost.textContent = '$' + totalCostValue;
     }
 
     function largeCarInfoModal() {
@@ -834,6 +838,7 @@
         vehicleNameHeader.textContent = "MINI COOPER S 3-DOOR HATCH";
         vehicleImage.src = "img/vehicleImages/largeCar.jpg";
         grabPreCalculatedDistance()
+        // customisedDistanceValues()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
 
@@ -849,7 +854,7 @@
 
         var rentalPriceValue = Number(largeCarRentalPriceArray[0]);
         var fuelCostValue = Number(largeCarFuelCostArray[0]);
-        var totalCostValue = rentalPriceValue + fuelCostValue;
+        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
         totalCost.textContent = '$' + totalCostValue;
     }
 
@@ -860,6 +865,7 @@
         vehicleNameHeader.textContent = "VOLKSWAGEN CAMPER VAN";
         vehicleImage.src = "img/vehicleImages/motorhome.jpg";
         grabPreCalculatedDistance()
+        // customisedDistanceValues()
         travelLength.textContent = dayQuantity.value + ' days';
         amountOfSeats.textContent = seatQuantity.value + ' people';
 
@@ -875,7 +881,7 @@
 
         var rentalPriceValue = Number(motorhomeRentalPriceArray[0]);
         var fuelCostValue = Number(motorhomeFuelCostArray[0]);
-        var totalCostValue = rentalPriceValue + fuelCostValue;
+        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
         totalCost.textContent = '$' + totalCostValue;
     }
 
@@ -890,7 +896,6 @@
     var southIslandDistance = 1071;
 
     var travelDistanceValue = [];
-    
 
     function grabPreCalculatedDistance () {
         if (fullTrip.checked) {
@@ -909,12 +914,234 @@
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (customiseButton.checked) {
-            var travelDistance = 'TBD';
+            customisedDistanceValues()
+        }
+    }
+
+    function customisedDistanceValues () {
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "auckland") && (endingPointSelect.value == "auckland" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[0].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "waikato") && (endingPointSelect.value == "waikato" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[1].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "whanganui") && (endingPointSelect.value == "whanganui" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[2].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[3].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[4].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[5].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[6].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[7].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "kaitaia")) {
+            var travelDistance = routePossibilities[8].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "waikato") && (endingPointSelect.value == "waikato" || endingPointSelect.value == "auckland")) {
+            var travelDistance = routePossibilities[9].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "whanganui") && (endingPointSelect.value == "whanganui" || endingPointSelect.value == "auckland")) {
+            var travelDistance = routePossibilities[10].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "auckland")) {
+            var travelDistance = routePossibilities[11].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "auckland")) {
+            var travelDistance = routePossibilities[12].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "auckland")) {
+            var travelDistance = routePossibilities[12].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "auckland")) {
+            var travelDistance = routePossibilities[13].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "auckland")) {
+            var travelDistance = routePossibilities[14].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "waikato")) {
+            var travelDistance = routePossibilities[15].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "waikato")) {
+            var travelDistance = routePossibilities[16].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "waikato")) {
+            var travelDistance = routePossibilities[17].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "waikato")) {
+            var travelDistance = routePossibilities[18].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "waikato")) {
+            var travelDistance = routePossibilities[19].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "waikato")) {
+            var travelDistance = routePossibilities[20].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "whanganui")) {
+            var travelDistance = routePossibilities[21].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "whanganui")) {
+            var travelDistance = routePossibilities[22].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "whanganui")) {
+            var travelDistance = routePossibilities[23].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "whanganui")) {
+            var travelDistance = routePossibilities[24].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "whanganui")) {
+            var travelDistance = routePossibilities[25].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "whanganui")) {
+            var travelDistance = routePossibilities[26].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "wellington")) {
+            var travelDistance = routePossibilities[27].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "wellington")) {
+            var travelDistance = routePossibilities[28].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "wellington")) {
+            var travelDistance = routePossibilities[29].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "wellington")) {
+            var travelDistance = routePossibilities[30].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "wellington")) {
+            var travelDistance = routePossibilities[31].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "greymouth")) {
+            var travelDistance = routePossibilities[32].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "greymouth")) {
+            var travelDistance = routePossibilities[33].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "greymouth")) {
+            var travelDistance = routePossibilities[34].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "greymouth")) {
+            var travelDistance = routePossibilities[35].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "christchurch" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "christchurch")) {
+            var travelDistance = routePossibilities[36].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "christchurch" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "christchurch")) {
+            var travelDistance = routePossibilities[37].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "christchurch" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "christchurch")) {
+            var travelDistance = routePossibilities[38].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "queenstown" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "queenstown")) {
+            var travelDistance = routePossibilities[39].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "queenstown" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "queenstown")) {
+            var travelDistance = routePossibilities[40].distance;
+            travelDistanceValue.push(travelDistance);
+            travelDistancePrint.textContent = travelDistance + ' km';
+        }
+        if ((startingPointSelect.value == "dunedin" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "dunedin")) {
+            var travelDistance = routePossibilities[41].distance;
             travelDistanceValue.push(travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
     }
 
+        
+    
+    
+
+    
+    
     
 
     
