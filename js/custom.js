@@ -1,86 +1,74 @@
 //This is my custom js.
 
 (function () {
+    changeNextArrowColor()
 
-    //Initial Invokations
-    hidingPages()
-    nextAndBackButtons()
+    //show and hide pages event listeners
+    document.getElementById('getStartedBtn').addEventListener('click', hideLandingPage, false);
+    document.getElementById('logo').addEventListener('click', showLandingPage, false);
+    document.getElementById('newSearch').addEventListener('click', showLandingPage, false);
 
-    //A function wrapper to hide pages
-    function hidingPages () {
-        var landingPage = document.getElementById('landingPage');
-        var mainAppContent = document.getElementById('mainAppContent')
+    //These are variables for the Landing page and App content page.
+    var landingPage = document.getElementById('landingPage');
+    var mainAppContent = document.getElementById('mainAppContent')
 
-        //show and hide pages event listeners
-        document.getElementById('getStartedBtn').addEventListener('click', hideLandingPage, false);
-        document.getElementById('logo').addEventListener('click', showLandingPage, false);
-        document.getElementById('newSearch').addEventListener('click', showLandingPage, false);
-
-        //function that hides the loading page
-        function hideLandingPage() {
-            var questionOneWrapper = document.getElementById('questionOne')
-
-            landingPage.style.display = 'none';
-            mainAppContent.style.display = 'block';
-            questionOneWrapper.style.display = 'block';
-
-            //Invokations for functions
-            mapbox()
-            addMinusSeats()
-            addMinusDays()
-        }
-
-        //function that shows the loading page
-        function showLandingPage() {
-            var questionOneWrapper = document.getElementById('questionOne')
-
-            mainAppContent.style.display = 'none';
-            landingPage.style.display = 'block';
-            questionOneWrapper.style.display = 'none';
-
-            window.location.reload();
-        }
+    //function that hides the loading page
+    function hideLandingPage() {
+        landingPage.style.display = 'none';
+        mainAppContent.style.display = 'block';
+        questionOne.style.display = 'block';
+        //Invokations for functions
+        mapbox()
+        addMinusSeats()
+        addMinusDays()
     }
-    
-    //A function to hold all Event listeners
-    function nextAndBackButtons () {
-        //Next question events listeners
-        document.getElementById('submitQuestionOne').addEventListener('click', questionOneValidation, false);
-        document.getElementById('submitQuestionOneCustomise').addEventListener('click', customiseQuestionValidation, false);
-        document.getElementById('submitQuestionTwo').addEventListener('click', questionTwoValidation, false);
-        document.getElementById('submitQuestionThree').addEventListener('click', questionThreeValidation, false);
+    //function that shows the loading page
+    function showLandingPage() {
+        mainAppContent.style.display = 'none';
+        landingPage.style.display = 'block';
+        questionOne.style.display = 'none';
+        //Refresh page, which cancels all input data
+        window.location.reload();
+    }
 
-        //Go back events listeners
-        document.getElementById('customiseBackButton').addEventListener('click', goBackToQuestionOne, false);
-        document.getElementById('questionTwoBackButton').addEventListener('click', goBackToQuestionOne, false);
-        document.getElementById('questionThreeBackButton').addEventListener('click', goBackToQuestionTwo, false);
-        document.getElementById('questionFourBackButton').addEventListener('click', goBackToQuestionThree, false);
+    //Form question wrappers variables
+    var questionOne = document.getElementById('questionOne');
+    var questionOneCustomise = document.getElementById('questionOneCustomise');
+    var questionTwo = document.getElementById('questionTwo');
+    var questionThree = document.getElementById('questionThree');
+    var questionFour = document.getElementById('questionFour');
 
-        //Function to go back to Question one
-        function goBackToQuestionOne() {
-            document.getElementById('questionOne').style.display = 'block';
-            document.getElementById('questionTwo').style.display = 'none';
-            document.getElementById('questionOneCustomise').style.display = 'none';
-        }
+    //Variable for back button
+    var customiseBackButton = document.getElementById('customiseBackButton')
+    var questionTwoBackButton = document.getElementById('questionTwoBackButton')
+    var questionThreeBackButton = document.getElementById('questionThreeBackButton')
+    var questionFourBackButton = document.getElementById('questionFourBackButton')
 
-        //Function to go back to Question Two
-        function goBackToQuestionTwo() {
-            document.getElementById('questionTwo').style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-        }
+    //Back button event listeners
+    customiseBackButton.addEventListener('click', function () {
+        goBackButton(questionOne, questionOneCustomise)
+    }, false);
+    questionTwoBackButton.addEventListener('click', function () {
+        goBackButton(questionOne, questionTwo)
+    }, false);
+    questionThreeBackButton.addEventListener('click', function () {
+        goBackButton(questionTwo, questionThree)
+    }, false);
+    questionFourBackButton.addEventListener('click', function () {
+        goBackButton(questionThree, questionFour)
+    }, false);
 
-        //Function to go back to Question Three
-        function goBackToQuestionThree() {
-            document.getElementById('questionThree').style.display = 'block';
-            document.getElementById('questionFour').style.display = 'none';
-        }
+    //Go back button function
+    function goBackButton (showQuestion, hideQuestion) {
+        showQuestion.style.display = 'block';
+        hideQuestion.style.display = 'none';
     }
 
     // Adding and Minus number of seats function
     function addMinusSeats() {
         var addSeat = document.getElementById('addSeat');
         var minusSeat = document.getElementById('minusSeat');
-        var seatQuantity = document.getElementById('seatQuantity');
+        // var seatQuantity = document.getElementById('seatQuantity');
         var seatCount = 0;
 
         addSeat.addEventListener('click', addSeats, false);
@@ -104,7 +92,7 @@
     function addMinusDays () {
         var addDay = document.getElementById('addDays');
         var minusDay = document.getElementById('minusDays');
-        var dayQuantity = document.getElementById('dayQuantity');
+        // var dayQuantity = document.getElementById('dayQuantity');
         var dayCount = 0;
 
         var seatQuantity = document.getElementById('seatQuantity');
@@ -143,110 +131,163 @@
         });
     });
 
+    function changeNextArrowColor () {
+
+        //Question One: When a Trip a been checked change arrow colour to yellow
+        $('#customise').on('change', function () {
+            // $("#nextArrowOne").css("color", "#ffdd12");
+            nextArrowOne.style.colour = "#ffdd12";
+        })
+        $('#northIsland').on('change', function () {
+            // $("#nextArrowOne").css("color", "#ffdd12");
+            nextArrowOne.style.colour = "#ffdd12";
+        })
+        $('#southIsland').on('change', function () {
+            // $("#nextArrowOne").css("color", "#ffdd12");
+            nextArrowOne.style.colour = "#ffdd12";
+        })
+        $('#fullTrip').on('change', function () {
+            // $("#nextArrowOne").css("color", "#ffdd12");
+            nextArrowOne.style.colour = "#ffdd12";
+        })
+
+        //Question Two: When seatQuantity has value change arrow colour to yellow
+        if (dayQuantity.value >= 1){
+            // $("#nextArrowOne").css("color", "#ffdd12");
+            nextArrowTwo.style.colour = "#ffdd12";
+        }
+
+
+    }
+
 //____________________________________________________________________________________________________//
+
+    // Next arrow variables
+    var nextArrowOne = document.getElementById('submitQuestionOne')
+    var nextArrowOneCustomise = document.getElementById('submitQuestionOneCustomise')
+    var nextArrowTwo = document.getElementById('submitQuestionTwo')
+    var nextArrowThree = document.getElementById('submitQuestionThree')
+    // Next question events listeners
+    nextArrowOne.addEventListener('click', questionOneValidation, false);
+    nextArrowOneCustomise.addEventListener('click', customiseQuestionValidation, false);
+    nextArrowTwo.addEventListener('click', questionTwoValidation, false);
+    nextArrowThree.addEventListener('click', questionThreeValidation, false);
+
+    //Trip options variables
+    var customiseButton = document.getElementById('customise');
+    var northIsland = document.getElementById('northIsland');
+    var southIsland = document.getElementById('southIsland');
+    var fullTrip = document.getElementById('fullTrip');
+    //Vehicle option variables
+    var motorbike = document.getElementById('motorbike');
+    var smallCar = document.getElementById('smallCar');
+    var largeCar = document.getElementById('largeCar');
+    var motorhome = document.getElementById('motorhome');
+    //Customise question selects variables
+    var startingPointSelect = document.getElementById('sel1');
+    var endingPointSelect = document.getElementById('sel2');
+    //Seat and day Quantity variables
+    var seatQuantity = document.getElementById('seatQuantity');
+    var dayQuantity = document.getElementById('dayQuantity');
 
     //Valiadtion JS for the valiadtion of the form questions
 
     //Validation for Question One
     function questionOneValidation() {
-        //Type of trip option variables
-        var customiseButton = document.getElementById('customise');
-        var northIsland = document.getElementById('northIsland');
-        var southIsland = document.getElementById('southIsland');
-        var fullTrip = document.getElementById('fullTrip');
-
         if (customiseButton.checked) {
-            document.getElementById('questionOne').style.display = 'none';
-            document.getElementById('questionOneCustomise').style.display = 'block';
+            questionOne.style.display = 'none';
+            questionOneCustomise.style.display = 'block';
 
         }
         else if (fullTrip.checked || southIsland.checked || northIsland.checked) {
-            document.getElementById('questionOne').style.display = 'none';
-            document.getElementById('questionTwo').style.display = 'block';
-        }
+            questionOne.style.display = 'none';
+            questionTwo.style.display = 'block';
+        }     
     }
 
     //Validating Question One Customise
     function customiseQuestionValidation() {
-        var startingPointSelect = document.getElementById('sel1');
-        var endingPointSelect = document.getElementById('sel2');
-
         if (startingPointSelect.value && endingPointSelect.value) {
-            document.getElementById('questionOneCustomise').style.display = 'none';
-            document.getElementById('questionTwo').style.display = 'block';
+            questionOneCustomise.style.display = 'none';
+            questionTwo.style.display = 'block';
         }
     }
 
     //Validating Question Two 
     function questionTwoValidation() {
-        var seatQuantity = document.getElementById('seatQuantity');
-
         if (seatQuantity.value > 0) {
-            document.getElementById('questionTwo').style.display = 'none';
-            document.getElementById('questionThree').style.display = 'block';
+            questionTwo.style.display = 'none';
+            questionThree.style.display = 'block';
         }
     }
 
     //Validating Question Three 
     //Taking seat and day quantity to determine what vehicles will be displayed in question four
     function questionThreeValidation() {
-        var dayQuantity = document.getElementById('dayQuantity').value;
-        var seatQuantity = document.getElementById('seatQuantity').value;
 
-        //Vehicle option variables
-        var motorbike = document.getElementById('motorbike');
-        var smallCar = document.getElementById('smallCar');
-        var largeCar = document.getElementById('largeCar');
-        var motorhome = document.getElementById('motorhome');
+        grabPreCalculatedDistance()
 
-        showLargeCar()
-        showMotorbike()
-        showMotorhome()
-        showSmallCar()
-
-        function showMotorbike() {
-            if (seatQuantity == 1 && (dayQuantity > 0 && dayQuantity <= 5)) {
-                motorbike.style.display = 'block';
-                document.getElementById('questionThree').style.display = 'none';
-                document.getElementById('questionFour').style.display = 'block';
-            }
-            else {
-                motorbike.style.display = 'none';
-            }
+        if (seatQuantity.value == 1 && (dayQuantity.value > 0 && dayQuantity.value <= 5) && (travelDistanceValue > 900 && dayQuantity.value > 1 )) {
+            motorbike.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else if (seatQuantity.value == 1 && (dayQuantity.value > 0 && dayQuantity.value <= 5) && (travelDistanceValue <= 900)){
+            motorbike.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else {
+            motorbike.style.display = 'none';
+            console.log('break');
         }
 
-        function showSmallCar() {
-            if ((seatQuantity > 0 && seatQuantity <= 2) && (dayQuantity > 0 && dayQuantity <= 10)) {
-                smallCar.style.display = 'block';
-                document.getElementById('questionThree').style.display = 'none';
-                document.getElementById('questionFour').style.display = 'block';
-            }
-            else {
-                smallCar.style.display = 'none';
-            }
+        if ((seatQuantity.value > 0 && seatQuantity.value <= 2) && (dayQuantity.value > 0 && dayQuantity.value <= 10) && (travelDistanceValue > 900 && dayQuantity.value > 1)) {
+            smallCar.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else if ((seatQuantity.value > 0 && seatQuantity.value <= 2) && (dayQuantity.value > 0 && dayQuantity.value <= 10) && (travelDistanceValue <= 900)){
+            smallCar.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else {
+            smallCar.style.display = 'none';
+            console.log('break');
+        }
+    
+        if ((seatQuantity.value > 0 && seatQuantity.value <= 5) && (dayQuantity.value >= 3 && dayQuantity.value <= 10) && (travelDistanceValue > 900 && dayQuantity.value > 1)) {
+            largeCar.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else if ((seatQuantity.value > 0 && seatQuantity.value <= 5) && (dayQuantity.value >= 3 && dayQuantity.value <= 10) && (travelDistanceValue <= 900)) {
+            largeCar.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else {
+            largeCar.style.display = 'none';
+            console.log('break');
         }
 
-        function showLargeCar() {
-            if ((seatQuantity > 0 && seatQuantity <= 5) && (dayQuantity >= 3 && dayQuantity <= 10)) {
-                largeCar.style.display = 'block';
-                document.getElementById('questionThree').style.display = 'none';
-                document.getElementById('questionFour').style.display = 'block';
-            }
-            else {
-                largeCar.style.display = 'none';
-            }
+        if ((seatQuantity.value >= 2 && seatQuantity.value <= 6) && (dayQuantity.value >= 2 && dayQuantity.value <= 15) && (travelDistanceValue > 900 && dayQuantity.value > 1)) {
+            motorhome.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else if ((seatQuantity.value >= 2 && seatQuantity.value <= 6) && (dayQuantity.value >= 2 && dayQuantity.value <= 15) && (travelDistanceValue <= 900)) {
+            motorhome.style.display = 'block';
+            document.getElementById('questionThree').style.display = 'none';
+            document.getElementById('questionFour').style.display = 'block';
+        }
+        else {
+            motorhome.style.display = 'none';
+            console.log('break');
         }
 
-        function showMotorhome() {
-            if ((seatQuantity >= 2 && seatQuantity <= 6) && (dayQuantity >= 2 && dayQuantity <= 15)) {
-                motorhome.style.display = 'block';
-                document.getElementById('questionThree').style.display = 'none';
-                document.getElementById('questionFour').style.display = 'block';
-            }
-            else {
-                motorhome.style.display = 'none';
-            }
-        }
+        console.log(travelDistanceValue);
     }
 
 //____________________________________________________________________________________________________//
@@ -751,166 +792,80 @@
 
 //____________________________________________________________________________________________________//
 
-    //Vehicle Option Modal Functions
+//Vehicle Option Modal Functions
     //Vehicle option variables
-    var motorbike = document.getElementById('motorbike');
-    var smallCar = document.getElementById('smallCar');
-    var largeCar = document.getElementById('largeCar');
-    var motorhome = document.getElementById('motorhome');
-    var vehicleNameHeader = document.getElementById('vehicleInfoModalLabel');
-    var vehicleImage = document.getElementById('vehicleImage');
     var travelLength = document.getElementById('numberOfDays');
-    var dayQuantity = document.getElementById('dayQuantity');
     var amountOfSeats = document.getElementById('numberOfPeople');
-    var seatQuantity = document.getElementById('seatQuantity');
-    var rentalPrice = document.getElementById('rentalPrice');
-    var rentalPriceEquation = document.getElementById('rentalPriceCalculation');
     var fuelCost = document.getElementById('fuelCost');
     var fuelCostEquation = document.getElementById('fuelCostCalculation');
     var totalCost = document.getElementById('totalCost');
-    var startingPointSelect = document.getElementById('sel1');
-    var endingPointSelect = document.getElementById('sel2');
-
-
-    motorbike.addEventListener('click', motorbikeInfoModal, false);
-    smallCar.addEventListener('click', smallCarInfoModal, false);
-    largeCar.addEventListener('click', largeCarInfoModal, false);
-    motorhome.addEventListener('click', motorhomeInfoModal, false);
-    
-    function motorbikeInfoModal () {
-        var motorbikeRentalPriceArray = [];
-        var motorbikeFuelCostArray = [];
-
-        vehicleNameHeader.textContent = "TRIUMPH DAYTONA 650";
-        vehicleImage.src = "img/vehicleImages/motorcycle.jpg";
-        grabPreCalculatedDistance()
-        // customisedDistanceValues()
-        travelLength.textContent = dayQuantity.value + ' days';
-        amountOfSeats.textContent = seatQuantity.value + ' people';
-
-        var totalRentalPrice = (dayQuantity.value * 109).toFixed(2);
-        rentalPrice.textContent = '$' + totalRentalPrice;
-        motorbikeRentalPriceArray.push(totalRentalPrice);
-        rentalPriceEquation.textContent = '($109.00/day x ' + dayQuantity.value + ')';
-        
-        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 3.7) * 1.98).toFixed(2);
-        fuelCost.textContent = '$' + estimatedFuelCost;
-        motorbikeFuelCostArray.push(estimatedFuelCost);
-        fuelCostEquation.textContent = '($1.98/L x 3.7L/100km for ' + travelDistanceValue[0] + 'km)';
-
-        var rentalPriceValue = Number(motorbikeRentalPriceArray[0]);
-        var fuelCostValue = Number(motorbikeFuelCostArray[0]);
-        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
-        totalCost.textContent = '$' + totalCostValue;
-    }
-
-    function smallCarInfoModal () {
-        var smallCarRentalPriceArray = [];
-        var smallCarFuelCostArray = [];
-        
-        vehicleNameHeader.textContent = "2008 SMART FORTWO";
-        vehicleImage.src = "img/vehicleImages/smallCar.jpg";
-        grabPreCalculatedDistance()
-        // customisedDistanceValues()
-        travelLength.textContent = dayQuantity.value + ' days';
-        amountOfSeats.textContent = seatQuantity.value + ' people';
-
-        totalRentalPrice = (dayQuantity.value * 129).toFixed(2);
-        rentalPrice.textContent = '$' + totalRentalPrice;
-        smallCarRentalPriceArray.push(totalRentalPrice);
-        rentalPriceEquation.textContent = '($129.00/day x ' + dayQuantity.value + ')';
-
-        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 8.5) * 1.98).toFixed(2);
-        fuelCost.textContent = '$' + estimatedFuelCost;
-        smallCarFuelCostArray.push(estimatedFuelCost);
-        fuelCostEquation.textContent = '($1.98/L x 8.5L/100km for ' + travelDistanceValue[0] + 'km)';
-
-        var rentalPriceValue = Number(smallCarRentalPriceArray[0]);
-        var fuelCostValue = Number(smallCarFuelCostArray[0]);
-        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
-        totalCost.textContent = '$' + totalCostValue;
-    }
-
-    function largeCarInfoModal() {
-        var largeCarRentalPriceArray = [];
-        var largeCarFuelCostArray = [];
-
-        vehicleNameHeader.textContent = "MINI COOPER S 3-DOOR HATCH";
-        vehicleImage.src = "img/vehicleImages/largeCar.jpg";
-        grabPreCalculatedDistance()
-        // customisedDistanceValues()
-        travelLength.textContent = dayQuantity.value + ' days';
-        amountOfSeats.textContent = seatQuantity.value + ' people';
-
-        totalRentalPrice = (dayQuantity.value * 144).toFixed(2);
-        rentalPrice.textContent = '$' + totalRentalPrice;
-        largeCarRentalPriceArray.push(totalRentalPrice);
-        rentalPriceEquation.textContent = '($144.00/day x ' + dayQuantity.value + ')';
-
-        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 9.7) * 1.98).toFixed(2);
-        fuelCost.textContent = '$' + estimatedFuelCost;
-        largeCarFuelCostArray.push(estimatedFuelCost);
-        fuelCostEquation.textContent = '($1.98/L x 9.7L/100km for ' + travelDistanceValue[0] + 'km)';
-
-        var rentalPriceValue = Number(largeCarRentalPriceArray[0]);
-        var fuelCostValue = Number(largeCarFuelCostArray[0]);
-        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
-        totalCost.textContent = '$' + totalCostValue;
-    }
-
-    function motorhomeInfoModal() {
-        var motorhomeRentalPriceArray = [];
-        var motorhomeFuelCostArray = [];
-
-        vehicleNameHeader.textContent = "VOLKSWAGEN CAMPER VAN";
-        vehicleImage.src = "img/vehicleImages/motorhome.jpg";
-        grabPreCalculatedDistance()
-        // customisedDistanceValues()
-        travelLength.textContent = dayQuantity.value + ' days';
-        amountOfSeats.textContent = seatQuantity.value + ' people';
-
-        totalRentalPrice = (dayQuantity.value * 200).toFixed(2);
-        rentalPrice.textContent = '$' + totalRentalPrice;
-        motorhomeRentalPriceArray.push(totalRentalPrice);
-        rentalPriceEquation.textContent = '($200.00/day x ' + dayQuantity.value + ')';
-
-        var estimatedFuelCost = (((travelDistanceValue[0] / 100) * 17) * 1.98).toFixed(2);
-        fuelCost.textContent = '$' + estimatedFuelCost;
-        motorhomeFuelCostArray.push(estimatedFuelCost);
-        fuelCostEquation.textContent = '($1.98/L x 17L/100km for ' + travelDistanceValue[0] + 'km)';
-
-        var rentalPriceValue = Number(motorhomeRentalPriceArray[0]);
-        var fuelCostValue = Number(motorhomeFuelCostArray[0]);
-        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
-        totalCost.textContent = '$' + totalCostValue;
-    }
-
-    var customiseButton = document.getElementById('customise');
-    var northIsland = document.getElementById('northIsland');
-    var southIsland = document.getElementById('southIsland');
-    var fullTrip = document.getElementById('fullTrip');
     var travelDistancePrint = document.getElementById('travelDistance');
-
+    //Vehicle Name and Image
+    var vehicleNameHeader = document.getElementById('vehicleInfoModalLabel');
+    var vehicleImage = document.getElementById('vehicleImage');
+    //Rental Cost Variable
+    var rentalPrice = document.getElementById('rentalPrice');
+    var rentalPriceEquation = document.getElementById('rentalPriceCalculation');
+    //Trip distance values
     var fullTripDistance = 2500;
     var northIslandDistance = 978;
     var southIslandDistance = 1071;
 
     var travelDistanceValue = [];
 
+    motorbike.addEventListener('click', function () {
+        vehicleModalInfo("TRIUMPH DAYTONA 650", "img/vehicleImages/motorcycle.jpg", 109, 3.7)
+    }, false);
+    smallCar.addEventListener('click', function () {
+        vehicleModalInfo("2008 SMART FORTWO", "img/vehicleImages/smallCar.jpg", 129, 8.5)
+    }, false);
+    largeCar.addEventListener('click', function () {
+        vehicleModalInfo("MINI COOPER S 3-DOOR HATCH", "img/vehicleImages/largeCar.jpg", 144, 9.7)
+    }, false);
+    motorhome.addEventListener('click', function () {
+        vehicleModalInfo("VOLKSWAGEN CAMPER VAN", "img/vehicleImages/motorhome.jpg", 200, 17)
+    }, false);
+
+    function vehicleModalInfo (carName, carImage, rentalCost, fuelCapacity) {
+        var rentalPriceArray = [];
+        var fuelCostArray = [];
+
+        grabPreCalculatedDistance()
+        vehicleNameHeader.textContent = carName;
+        vehicleImage.src = carImage;
+        travelLength.textContent = dayQuantity.value + ' days';
+        amountOfSeats.textContent = seatQuantity.value + ' people';
+
+        var totalRentalPrice = (dayQuantity.value * rentalCost).toFixed(2);
+        rentalPrice.textContent = '$' + totalRentalPrice;
+        rentalPriceArray.push(totalRentalPrice);
+        rentalPriceEquation.textContent = '($' + rentalCost + '/day x ' + dayQuantity.value + ')';
+
+        var estimatedFuelCost = (((travelDistanceValue / 100) * fuelCapacity) * 1.98).toFixed(2);
+        fuelCost.textContent = '$' + estimatedFuelCost;
+        fuelCostArray.push(estimatedFuelCost);
+        fuelCostEquation.textContent = '($1.98/L x ' + fuelCapacity + 'L/100km for ' + travelDistanceValue + 'km)';
+
+        var rentalPriceValue = Number(rentalPriceArray);
+        var fuelCostValue = Number(fuelCostArray);
+        var totalCostValue = (rentalPriceValue + fuelCostValue).toFixed(2);
+        totalCost.textContent = '$' + totalCostValue;
+    }
+
     function grabPreCalculatedDistance () {
         if (fullTrip.checked) {
             var travelDistance = fullTripDistance;
-            travelDistanceValue.push(travelDistance);
+            travelDistanceValue.splice(0, 1, travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (northIsland.checked) {
             var travelDistance = northIslandDistance;
-            travelDistanceValue.push(travelDistance);
+            travelDistanceValue.splice(0, 1, travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (southIsland.checked) {
             var travelDistance = southIslandDistance;
-            travelDistanceValue.push(travelDistance);
+            travelDistanceValue.splice(0, 1, travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (customiseButton.checked) {
@@ -918,234 +873,15 @@
         }
     }
 
-    function customisedDistanceValues () {
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "auckland") && (endingPointSelect.value == "auckland" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[0].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "waikato") && (endingPointSelect.value == "waikato" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[1].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "whanganui") && (endingPointSelect.value == "whanganui" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[2].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[3].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[4].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[5].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[6].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[7].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "kaitaia" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "kaitaia")) {
-            var travelDistance = routePossibilities[8].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "waikato") && (endingPointSelect.value == "waikato" || endingPointSelect.value == "auckland")) {
-            var travelDistance = routePossibilities[9].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "whanganui") && (endingPointSelect.value == "whanganui" || endingPointSelect.value == "auckland")) {
-            var travelDistance = routePossibilities[10].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "auckland")) {
-            var travelDistance = routePossibilities[11].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "auckland")) {
-            var travelDistance = routePossibilities[12].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "auckland")) {
-            var travelDistance = routePossibilities[12].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "auckland")) {
-            var travelDistance = routePossibilities[13].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "auckland" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "auckland")) {
-            var travelDistance = routePossibilities[14].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "waikato")) {
-            var travelDistance = routePossibilities[15].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "waikato")) {
-            var travelDistance = routePossibilities[16].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "waikato")) {
-            var travelDistance = routePossibilities[17].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "waikato")) {
-            var travelDistance = routePossibilities[18].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "waikato")) {
-            var travelDistance = routePossibilities[19].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "waikato" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "waikato")) {
-            var travelDistance = routePossibilities[20].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "wellington") && (endingPointSelect.value == "wellington" || endingPointSelect.value == "whanganui")) {
-            var travelDistance = routePossibilities[21].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "whanganui")) {
-            var travelDistance = routePossibilities[22].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "whanganui")) {
-            var travelDistance = routePossibilities[23].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "whanganui")) {
-            var travelDistance = routePossibilities[24].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "whanganui")) {
-            var travelDistance = routePossibilities[25].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "whanganui" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "whanganui")) {
-            var travelDistance = routePossibilities[26].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "greymouth") && (endingPointSelect.value == "greymouth" || endingPointSelect.value == "wellington")) {
-            var travelDistance = routePossibilities[27].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "wellington")) {
-            var travelDistance = routePossibilities[28].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "wellington")) {
-            var travelDistance = routePossibilities[29].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "wellington")) {
-            var travelDistance = routePossibilities[30].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "wellington" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "wellington")) {
-            var travelDistance = routePossibilities[31].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "christchurch") && (endingPointSelect.value == "christchurch" || endingPointSelect.value == "greymouth")) {
-            var travelDistance = routePossibilities[32].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "greymouth")) {
-            var travelDistance = routePossibilities[33].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "greymouth")) {
-            var travelDistance = routePossibilities[34].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "greymouth" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "greymouth")) {
-            var travelDistance = routePossibilities[35].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "christchurch" || startingPointSelect.value == "queenstown") && (endingPointSelect.value == "queenstown" || endingPointSelect.value == "christchurch")) {
-            var travelDistance = routePossibilities[36].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "christchurch" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "christchurch")) {
-            var travelDistance = routePossibilities[37].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "christchurch" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "christchurch")) {
-            var travelDistance = routePossibilities[38].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "queenstown" || startingPointSelect.value == "dunedin") && (endingPointSelect.value == "dunedin" || endingPointSelect.value == "queenstown")) {
-            var travelDistance = routePossibilities[39].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "queenstown" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "queenstown")) {
-            var travelDistance = routePossibilities[40].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
-        }
-        if ((startingPointSelect.value == "dunedin" || startingPointSelect.value == "invercargill") && (endingPointSelect.value == "invercargill" || endingPointSelect.value == "dunedin")) {
-            var travelDistance = routePossibilities[41].distance;
-            travelDistanceValue.push(travelDistance);
-            travelDistancePrint.textContent = travelDistance + ' km';
+    function customisedDistanceValues() {
+        for (var i = 0; i < routeDataArray.length; i++) {
+            if ((startingPointSelect.value == routeDataArray[i][0] || startingPointSelect.value == routeDataArray[i][1]) && (endingPointSelect.value == routeDataArray[i][0] || endingPointSelect.value == routeDataArray[i][1])) {
+                var travelDistance = routePossibilities[routeDataArray[i][2]].distance;
+                travelDistanceValue.splice(0, 1, travelDistance);
+                travelDistancePrint.textContent = travelDistance + ' km';
+            }
         }
     }
-
-        
-    
-    
-
-    
-    
-    
-
-    
-
 })();
 
 

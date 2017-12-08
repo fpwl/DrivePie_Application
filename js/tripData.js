@@ -200,151 +200,202 @@ var routePossibilities = [
         distance: 1572
     },
     {
-        id: 14,
+        id: 16,
         route: "Auckland and Invercargill",
         distance: 1776
     },
     {
-        id: 14,
+        id: 17,
         route: "Waikato and Whanganui",
         distance: 300
     },
     {
-        id: 15,
+        id: 18,
         route: "Waikato and Wellington",
         distance: 476
     },
     {
-        id: 16,
+        id: 19,
         route: "Waikato and Greymouth",
         distance: 921
     },
     {
-        id: 17,
+        id: 20,
         route: "Waikato and Christchurch",
         distance: 1050
     },
     {
-        id: 18,
+        id: 21,
         route: "Waikato and Queenstown",
         distance: 1444
     },
     {
-        id: 19,
+        id: 22,
         route: "Waikato and Dunedin",
         distance: 1404
     },
     {
-        id: 20,
+        id: 23,
         route: "Waikato and Invercargill",
         distance: 1609
     },
     {
-        id: 21,
+        id: 24,
         route: "Whanganui and Wellington",
         distance: 194
     },
     {
-        id: 22,
+        id: 25,
         route: "Whanganui and Greymouth",
         distance: 639
     },
     {
-        id: 23,
+        id: 26,
         route: "Whanganui and Christchurch",
         distance: 768
     },
     {
-        id: 24,
+        id: 27,
         route: "Whanganui and Queenstown",
         distance: 1162
     },
     {
-        id: 25,
+        id: 28,
         route: "Whanganui and Dunedin",
         distance: 1122
     },
     {
-        id: 26,
+        id: 29,
         route: "Whanganui and Invercargill",
         distance: 1327
     },
     {
-        id: 27,
+        id: 30,
         route: "Wellington and Greymouth",
         distance: 451
     },
     {
-        id: 28,
+        id: 31,
         route: "Wellington and Christchurch",
         distance: 580
     },
     {
-        id: 29,
+        id: 32,
         route: "Wellington and Queenstown",
         distance: 974
     },
     {
-        id: 30,
+        id: 33,
         route: "Wellington and Dunedin",
         distance: 934
     },
     {
-        id: 31,
+        id: 34,
         route: "Wellington and Invercargill",
         distance: 1139
     },
     {
-        id: 32,
+        id: 35,
         route: "Greymouth and Christchurch",
         distance: 244
     },
     {
-        id: 33,
+        id: 36,
         route: "Greymouth and Queenstown",
         distance: 523
     },
     {
-        id: 34,
+        id: 37,
         route: "Greymouth and Dunedin",
         distance: 545
     },
     {
-        id: 35,
+        id: 38,
         route: "Greymouth and Invercargill",
         distance: 697
     },
     {
-        id: 36,
+        id: 39,
         route: "Christchurch and Queenstown",
         distance: 484
     },
     {
-        id: 37,
+        id: 40,
         route: "Christchurch and Dunedin",
         distance: 361
     },
     {
-        id: 38,
+        id: 41,
         route: "Christchurch and Invercargill",
         distance: 566
     },
     {
-        id: 39,
+        id: 42,
         route: "Queenstown and Dunedin",
         distance: 278
     },
     {
-        id: 40,
+        id: 43,
         route: "Queenstown and Invercargill",
         distance: 187
     },
     {
-        id: 41,
+        id: 44,
         route: "Dunedin and Invercargill",
         distance: 205
     },
 
 ];
+
+var routeDataArray = [
+    ["kaitaia", "auckland", 0],
+    ["kaitaia", "waikato", 1],
+    ["kaitaia", "whanganui", 2],
+    ["kaitaia", "wellington", 3],
+    ["kaitaia", "greymouth", 4],
+    ["kaitaia", "christchurch", 5],
+    ["kaitaia", "queenstown", 6],
+    ["kaitaia", "dunedin", 7],
+    ["kaitaia", "invercargill", 8],
+    ["auckland", "waikato", 9],
+    ["auckland", "whanganui", 10],
+    ["auckland", "welliington", 11],
+    ["auckland", "greymouth", 12],
+    ["auckland", "christchurch", 13],
+    ["auckland", "queenstown", 14],
+    ["auckland", "dunedin", 15],
+    ["auckland", "invercargill", 16],
+    ["waikato", "whangnaui", 17],
+    ["waikato", "wellington", 18],
+    ["waikato", "greymouth", 19],
+    ["waikato", "christchurch", 20],
+    ["waikato", "queenstown", 21],
+    ["waikato", "dunedin", 22],
+    ["waikato", "invercargill", 23],
+    ["whanganui", "wellington", 24],
+    ["whanganui", "greymouth", 25],
+    ["whanganui", "christchurch", 26],
+    ["whanganui", "queenstown", 27],
+    ["whanganui", "dunedin", 28],
+    ["whanganui", "invercargill", 29],
+    ["wellington", "greymouth", 30],
+    ["wellington", "christchurch", 31],
+    ["wellington", "queenstown", 32],
+    ["wellington", "dunedin", 33],
+    ["wellington", "invercargill", 34],
+    ["greymouth", "christchurch", 35],
+    ["greymouth", "queenstown", 36],
+    ["greymouth", "dunedin", 37],
+    ["greymouth", "invercargill", 38],
+    ["christchurch", "queenstown", 39],
+    ["christchurch", "dunedin", 40], 
+    ["christchurch", "invercargill", 41], 
+    ["queenstown", "dunedin", 42],    
+    ["queenstown", "invercargill", 43], 
+    ["dunedin", "invercargill", 44], 
+    
+
+
+]
 
 
