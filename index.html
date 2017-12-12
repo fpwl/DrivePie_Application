@@ -26,7 +26,10 @@
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.css' rel='stylesheet' />
 
         <!-- FONT AWESOME LINK -->
-        <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+
+        <!-- TOOLTIP PLUGIN -->
+        <link rel="stylesheet" type="text/css" href="plugins/tooltipster/dist/css/tooltipster.bundle.min.css" />
 
     </head>
 
@@ -94,7 +97,7 @@
                         <div class="empty-placeholder"></div>
                     
                         <div class="question-one-content">
-                            <h2 class="section-question">Pick a Trip</h2>
+                            <h2 class="section-question tippy tripTippy" title="Please select a Type of Trip to proceed.">Pick a Trip</h2>
                     
                             <div class="trip-buttons-wrapper">
                                 <label class="full-trip-label" data-filter="fullTrip">
@@ -115,7 +118,6 @@
                                 </label>
                             </div>
                         </div>
-                    
                     
                         <button type="button" id="submitQuestionOne" class="btn">
                             <i class="fa fa-caret-right" id="nextArrowOne" aria-hidden="true"></i>
@@ -142,7 +144,7 @@
                                         <div class="select-arrow">
                                             <i class="glyphicon glyphicon-triangle-bottom"></i>
                                         </div>
-                                        <select class="form-control" id="sel1">
+                                        <select class="form-control tippy startLocationTippy" title="Please select a Start Location." id="sel1">
                                             <option value="">Select a Starting Point</option>
                                             <option value="kaitaia">Kaitaia</option>
                                             <option value="auckland">Auckland</option>
@@ -164,7 +166,7 @@
                                         <div class="select-arrow">
                                             <i class="glyphicon glyphicon-triangle-bottom"></i>
                                         </div>
-                                        <select class="form-control" id="sel2">
+                                        <select class="form-control tippy endLocationTippy" title="Please select a End Location." id="sel2">
                                             <option value="">Select a End Point</option>
                                             <option value="kaitaia">Kaitaia</option>
                                             <option value="auckland">Auckland</option>
@@ -205,7 +207,7 @@
                                 <button type="button" id="minusSeat" class="btn minus-btn" value="minus">
                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                 </button>
-                                <div class="plus-minus-quantity">
+                                <div class="plus-minus-quantity tippy seatsTippy" title="Please add some Seats.">
                                     <input value="0" id="seatQuantity">
                                 </div>
                                 <button type="button" id="addSeat" class="btn add-btn" value="add">
@@ -236,7 +238,7 @@
                                 <button type="button" id="minusDays" class="btn minus-btn" value="minus">
                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                 </button>
-                                <div class="plus-minus-quantity">
+                                <div class="plus-minus-quantity tippy daysTippy" title="Please add some Days.">
                                     <input value="0" id="dayQuantity">
                                 </div>
                                 <button type="button" id="addDays" class="btn add-btn" value="add">
@@ -393,6 +395,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <!-- MapBox Script -->
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.js'></script>
+        <!-- TOOLTIP JS -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="plugins/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
         <!-- Custom JSON Data JS -->
         <script src="js/tripData.js"></script>
         <!-- Custom JS -->

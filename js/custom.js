@@ -1,49 +1,58 @@
 //This is my custom js.
 
 (function () {
-    changeNextArrowColor()
-
-    //show and hide pages event listeners
-    document.getElementById('getStartedBtn').addEventListener('click', hideLandingPage, false);
-    document.getElementById('logo').addEventListener('click', showLandingPage, false);
-    document.getElementById('newSearch').addEventListener('click', showLandingPage, false);
+    //Custom Variables
 
     //These are variables for the Landing page and App content page.
     var landingPage = document.getElementById('landingPage');
     var mainAppContent = document.getElementById('mainAppContent')
-
-    //function that hides the loading page
-    function hideLandingPage() {
-        landingPage.style.display = 'none';
-        mainAppContent.style.display = 'block';
-        questionOne.style.display = 'block';
-        //Invokations for functions
-        mapbox()
-        addMinusSeats()
-        addMinusDays()
-    }
-    //function that shows the loading page
-    function showLandingPage() {
-        mainAppContent.style.display = 'none';
-        landingPage.style.display = 'block';
-        questionOne.style.display = 'none';
-        //Refresh page, which cancels all input data
-        window.location.reload();
-    }
-
     //Form question wrappers variables
     var questionOne = document.getElementById('questionOne');
     var questionOneCustomise = document.getElementById('questionOneCustomise');
     var questionTwo = document.getElementById('questionTwo');
     var questionThree = document.getElementById('questionThree');
     var questionFour = document.getElementById('questionFour');
-
     //Variable for back button
     var customiseBackButton = document.getElementById('customiseBackButton')
     var questionTwoBackButton = document.getElementById('questionTwoBackButton')
     var questionThreeBackButton = document.getElementById('questionThreeBackButton')
     var questionFourBackButton = document.getElementById('questionFourBackButton')
+    //Variables for add and minus days and seats
+    var addDay = document.getElementById('addDays');
+    var minusDay = document.getElementById('minusDays');
+    var dayCount = 0;
+    var addSeat = document.getElementById('addSeat');
+    var minusSeat = document.getElementById('minusSeat');
+    var seatCount = 0;
+    // Next arrow variables
+    var nextArrowOne = document.getElementById('submitQuestionOne')
+    var nextArrowOneCustomise = document.getElementById('submitQuestionOneCustomise')
+    var nextArrowTwo = document.getElementById('submitQuestionTwo')
+    var nextArrowThree = document.getElementById('submitQuestionThree')
+    //Trip options variables
+    var customiseButton = document.getElementById('customise');
+    var northIsland = document.getElementById('northIsland');
+    var southIsland = document.getElementById('southIsland');
+    var fullTrip = document.getElementById('fullTrip');
+    //Vehicle option variables
+    var motorbike = document.getElementById('motorbike');
+    var smallCar = document.getElementById('smallCar');
+    var largeCar = document.getElementById('largeCar');
+    var motorhome = document.getElementById('motorhome');
+    //Customise question selects variables
+    var startingPointSelect = document.getElementById('sel1');
+    var endingPointSelect = document.getElementById('sel2');
+    //Seat and day Quantity variables
+    var seatQuantity = document.getElementById('seatQuantity');
+    var dayQuantity = document.getElementById('dayQuantity');
 
+
+    //Event Listeners
+
+    //show and hide pages event listeners
+    document.getElementById('getStartedBtn').addEventListener('click', hideLandingPage, false);
+    document.getElementById('logo').addEventListener('click', showLandingPage, false);
+    document.getElementById('newSearch').addEventListener('click', showLandingPage, false);
     //Back button event listeners
     customiseBackButton.addEventListener('click', function () {
         goBackButton(questionOne, questionOneCustomise)
@@ -57,62 +66,77 @@
     questionFourBackButton.addEventListener('click', function () {
         goBackButton(questionThree, questionFour)
     }, false);
+    //Add seats and days event listeners 
+    addSeat.addEventListener('click', addSeats, false);
+    minusSeat.addEventListener('click', minusSeats, false);
+    addDay.addEventListener('click', addDays, false);
+    minusDay.addEventListener('click', minusDays, false);
+    // Next question events listeners
+    nextArrowOne.addEventListener('click', questionOneValidation, false);
+    nextArrowOneCustomise.addEventListener('click', customiseQuestionValidation, false);
+    nextArrowTwo.addEventListener('click', questionTwoValidation, false);
+    nextArrowThree.addEventListener('click', questionThreeValidation, false);
+//_________________________________________________________________________________________________________________________________________//
 
-    //Go back button function
+    //function that hides the loading page
+    function hideLandingPage() {
+        landingPage.style.display = 'none';
+        mainAppContent.style.display = 'block';
+        questionOne.style.display = 'block';
+        //Init for mapbox to make the map fit the page 
+        mapbox()
+        //Init function to close tooltipser once conditional are met
+        $('.tippy').tooltipster({
+            trigger: 'custom',
+            triggerClose: {
+                click: true,
+                hover: true
+            }
+        });
+    }
+
+    //function that shows the loading page
+    function showLandingPage() {
+        mainAppContent.style.display = 'none';
+        landingPage.style.display = 'block';
+        questionOne.style.display = 'none';
+        //Refresh page, which cancels all input data
+        window.location.reload();
+    }
+
+    //A function for the Go back button
     function goBackButton (showQuestion, hideQuestion) {
         showQuestion.style.display = 'block';
         hideQuestion.style.display = 'none';
     }
-
-    // Adding and Minus number of seats function
-    function addMinusSeats() {
-        var addSeat = document.getElementById('addSeat');
-        var minusSeat = document.getElementById('minusSeat');
-        // var seatQuantity = document.getElementById('seatQuantity');
-        var seatCount = 0;
-
-        addSeat.addEventListener('click', addSeats, false);
-        minusSeat.addEventListener('click', minusSeats, false);
-
-        function addSeats () {
-            if (seatCount >= 0 && seatCount <= 5){
-                seatCount ++;
-                seatQuantity.value = seatCount;
-            }   
-        }
-        function minusSeats() {
-            if (seatCount > 0 && seatCount <= 6){
-                seatCount --;
-                seatQuantity.value = seatCount;
-            }
+    
+    // Adding and Minus number of seats 
+    function addSeats () {
+        if (seatCount >= 0 && seatCount <= 5){
+            seatCount ++;
+            seatQuantity.value = seatCount;
+        }   
+    }
+    function minusSeats() {
+        if (seatCount > 0 && seatCount <= 6){
+            seatCount --;
+            seatQuantity.value = seatCount;
         }
     }
 
-    //Adding and Minus number of days function
-    function addMinusDays () {
-        var addDay = document.getElementById('addDays');
-        var minusDay = document.getElementById('minusDays');
-        // var dayQuantity = document.getElementById('dayQuantity');
-        var dayCount = 0;
-
-        var seatQuantity = document.getElementById('seatQuantity');
-
-        addDay.addEventListener('click', addDays, false);
-        minusDay.addEventListener('click', minusDays, false);
-
-        function addDays() {
-            if (dayCount >= 0 && dayCount <= 14) {
-                dayCount++;
-                dayQuantity.value = dayCount;
-            }
+    //Adding and Minus number of days
+    function addDays() {
+        if (dayCount >= 0 && dayCount <= 14) {
+            dayCount++;
+            dayQuantity.value = dayCount;
         }
-        function minusDays() {
-            if (dayCount > 0 && dayCount <= 15) {
-                dayCount--;
-                dayQuantity.value = dayCount;
-            }
+    }
+    function minusDays() {
+        if (dayCount > 0 && dayCount <= 15) {
+            dayCount--;
+            dayQuantity.value = dayCount;
         }
-     }
+    }
 
      //Make customise route selection to not have same data in start and end location
     $('select').change(function () {
@@ -131,173 +155,108 @@
         });
     });
 
-    function changeNextArrowColor () {
-
-        //Question One: When a Trip a been checked change arrow colour to yellow
-        $('#customise').on('change', function () {
-            // $("#nextArrowOne").css("color", "#ffdd12");
-            nextArrowOne.style.colour = "#ffdd12";
-        })
-        $('#northIsland').on('change', function () {
-            // $("#nextArrowOne").css("color", "#ffdd12");
-            nextArrowOne.style.colour = "#ffdd12";
-        })
-        $('#southIsland').on('change', function () {
-            // $("#nextArrowOne").css("color", "#ffdd12");
-            nextArrowOne.style.colour = "#ffdd12";
-        })
-        $('#fullTrip').on('change', function () {
-            // $("#nextArrowOne").css("color", "#ffdd12");
-            nextArrowOne.style.colour = "#ffdd12";
-        })
-
-        //Question Two: When seatQuantity has value change arrow colour to yellow
-        if (dayQuantity.value >= 1){
-            // $("#nextArrowOne").css("color", "#ffdd12");
-            nextArrowTwo.style.colour = "#ffdd12";
-        }
-
-
-    }
-
 //____________________________________________________________________________________________________//
-
-    // Next arrow variables
-    var nextArrowOne = document.getElementById('submitQuestionOne')
-    var nextArrowOneCustomise = document.getElementById('submitQuestionOneCustomise')
-    var nextArrowTwo = document.getElementById('submitQuestionTwo')
-    var nextArrowThree = document.getElementById('submitQuestionThree')
-    // Next question events listeners
-    nextArrowOne.addEventListener('click', questionOneValidation, false);
-    nextArrowOneCustomise.addEventListener('click', customiseQuestionValidation, false);
-    nextArrowTwo.addEventListener('click', questionTwoValidation, false);
-    nextArrowThree.addEventListener('click', questionThreeValidation, false);
-
-    //Trip options variables
-    var customiseButton = document.getElementById('customise');
-    var northIsland = document.getElementById('northIsland');
-    var southIsland = document.getElementById('southIsland');
-    var fullTrip = document.getElementById('fullTrip');
-    //Vehicle option variables
-    var motorbike = document.getElementById('motorbike');
-    var smallCar = document.getElementById('smallCar');
-    var largeCar = document.getElementById('largeCar');
-    var motorhome = document.getElementById('motorhome');
-    //Customise question selects variables
-    var startingPointSelect = document.getElementById('sel1');
-    var endingPointSelect = document.getElementById('sel2');
-    //Seat and day Quantity variables
-    var seatQuantity = document.getElementById('seatQuantity');
-    var dayQuantity = document.getElementById('dayQuantity');
-
-    //Valiadtion JS for the valiadtion of the form questions
 
     //Validation for Question One
     function questionOneValidation() {
+        //Conditionals to determine what question to display
         if (customiseButton.checked) {
             questionOne.style.display = 'none';
             questionOneCustomise.style.display = 'block';
-
+            $('.tripTippy').tooltipster('close');
         }
         else if (fullTrip.checked || southIsland.checked || northIsland.checked) {
             questionOne.style.display = 'none';
-            questionTwo.style.display = 'block';
+            questionTwo.style.display = 'block';     
+            $('.tripTippy').tooltipster('close');    
         }     
+        else{
+            //A tooltip to pop up if no trip has been selected
+            $('.tripTippy').tooltipster('open');
+        }
     }
 
     //Validating Question One Customise
     function customiseQuestionValidation() {
+        //Conditionals to only show next question if both start and end locaation has a value
         if (startingPointSelect.value && endingPointSelect.value) {
             questionOneCustomise.style.display = 'none';
             questionTwo.style.display = 'block';
+            $('.endLocationTippy').tooltipster('close'); 
+            $('.startLocationTippy').tooltipster('close');
+        }
+        else if (startingPointSelect.value) {
+            //Show tooltip if no end location selected
+            $('.endLocationTippy').tooltipster('open');
+            $('.startLocationTippy').tooltipster('close');
+        }
+        else if (endingPointSelect.value) {
+            //Show tooltip if no start location selected
+            $('.startLocationTippy').tooltipster('open');
+            $('.endLocationTippy').tooltipster('close');
+        }
+        else{
+            //Show tooltips if no start and end location selected
+            $('.endLocationTippy').tooltipster('open'); 
+            $('.startLocationTippy').tooltipster('open');
         }
     }
 
     //Validating Question Two 
     function questionTwoValidation() {
+        //Conditional to only show next question when there is a seat quantity.
         if (seatQuantity.value > 0) {
             questionTwo.style.display = 'none';
             questionThree.style.display = 'block';
+            $('.seatsTippy').tooltipster('close');
+        }
+        else{
+            //Show tooltip if the has been no seats added
+            $('.seatsTippy').tooltipster('open');
         }
     }
 
     //Validating Question Three 
-    //Taking seat and day quantity to determine what vehicles will be displayed in question four
     function questionThreeValidation() {
-
+        //Invoking grabPreCalculatedDistance function so a travelDistanceValue exists
         grabPreCalculatedDistance()
-
-        if (seatQuantity.value == 1 && (dayQuantity.value > 0 && dayQuantity.value <= 5) && (travelDistanceValue > 900 && dayQuantity.value > 1 )) {
-            motorbike.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
+        //Taking seat and day quantity to determine what vehicles will be displayed in question four
+        //A for loop to loop through a array data to determine max and min, seat and day values, as well as the type of vehicle to show or hide
+        for (var i = 0; i < q3ValiadationArray.length; i++) {
+            if ((seatQuantity.value >= q3ValiadationArray[i][0] && seatQuantity.value <= q3ValiadationArray[i][1]) && (dayQuantity.value >= q3ValiadationArray[i][2] && dayQuantity.value <= q3ValiadationArray[i][3]) && (travelDistanceValue > 1080 && dayQuantity.value > 1)) {
+                q3ValiadationArray[i][4].style.display = 'block';
+                questionThree.style.display = 'none';
+                questionFour.style.display = 'block';
+                $('.daysTippy').tooltipster('close');
+            }
+            else if ((seatQuantity.value >= q3ValiadationArray[i][0] && seatQuantity.value <= q3ValiadationArray[i][1]) && (dayQuantity.value >= q3ValiadationArray[i][2] && dayQuantity.value <= q3ValiadationArray[i][3]) && (travelDistanceValue <= 1080)) {
+                q3ValiadationArray[i][4].style.display = 'block';
+                questionThree.style.display = 'none';
+                questionFour.style.display = 'block';
+                $('.daysTippy').tooltipster('close');
+            }
+            else {
+                //Hide specified vehicle if the conidtional do not meet
+                q3ValiadationArray[i][4].style.display = 'none';
+                //The conditionals below is to show different tool tips content depending on conditional requirements
+                if (travelDistanceValue < 1080 && dayQuantity.value < 1) {
+                    $('.daysTippy').tooltipster('open');
+                    $('.daysTippy').tooltipster('content', 'Please add some Days.');
+                }
+                else if (travelDistanceValue > 1080 && dayQuantity.value < 2) {
+                    $('.daysTippy').tooltipster('open');
+                    $('.daysTippy').tooltipster('content', 'The route chosen exceeds 1080km. For your saftey please extend your trip to 2 or more days');
+                }
+            }
         }
-        else if (seatQuantity.value == 1 && (dayQuantity.value > 0 && dayQuantity.value <= 5) && (travelDistanceValue <= 900)){
-            motorbike.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
-        }
-        else {
-            motorbike.style.display = 'none';
-            console.log('break');
-        }
-
-        if ((seatQuantity.value > 0 && seatQuantity.value <= 2) && (dayQuantity.value > 0 && dayQuantity.value <= 10) && (travelDistanceValue > 900 && dayQuantity.value > 1)) {
-            smallCar.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
-        }
-        else if ((seatQuantity.value > 0 && seatQuantity.value <= 2) && (dayQuantity.value > 0 && dayQuantity.value <= 10) && (travelDistanceValue <= 900)){
-            smallCar.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
-        }
-        else {
-            smallCar.style.display = 'none';
-            console.log('break');
-        }
-    
-        if ((seatQuantity.value > 0 && seatQuantity.value <= 5) && (dayQuantity.value >= 3 && dayQuantity.value <= 10) && (travelDistanceValue > 900 && dayQuantity.value > 1)) {
-            largeCar.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
-        }
-        else if ((seatQuantity.value > 0 && seatQuantity.value <= 5) && (dayQuantity.value >= 3 && dayQuantity.value <= 10) && (travelDistanceValue <= 900)) {
-            largeCar.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
-        }
-        else {
-            largeCar.style.display = 'none';
-            console.log('break');
-        }
-
-        if ((seatQuantity.value >= 2 && seatQuantity.value <= 6) && (dayQuantity.value >= 2 && dayQuantity.value <= 15) && (travelDistanceValue > 900 && dayQuantity.value > 1)) {
-            motorhome.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
-        }
-        else if ((seatQuantity.value >= 2 && seatQuantity.value <= 6) && (dayQuantity.value >= 2 && dayQuantity.value <= 15) && (travelDistanceValue <= 900)) {
-            motorhome.style.display = 'block';
-            document.getElementById('questionThree').style.display = 'none';
-            document.getElementById('questionFour').style.display = 'block';
-        }
-        else {
-            motorhome.style.display = 'none';
-            console.log('break');
-        }
-
-        console.log(travelDistanceValue);
     }
 
 //____________________________________________________________________________________________________//
 
-    //custom js for mapbox styles
-
-    //Displaying Mapbox map
+    //Custom js for mapbox styles
     function mapbox() {
         mapboxgl.accessToken = 'pk.eyJ1IjoiZnB3bCIsImEiOiJjamFib2swNnMwMjU0MndwZGwzdnhmZXBnIn0.0glfG4jZkFJwm0TJLuVriA';
-
+        //Displaying map 
         var map = new mapboxgl.Map({
             container: 'map', // container id
             style: 'mapbox://styles/fpwl/cjan5kfxmeaq02smsehvd41aa', // stylesheet location
@@ -306,10 +265,10 @@
         });
 
         //Hide and show mapbox markers
-        document.getElementById('northIsland').addEventListener('click', showNorthIslandMarkers, false);
-        document.getElementById('southIsland').addEventListener('click', showSouthIslandMarkers, false);
-        document.getElementById('fullTrip').addEventListener('click', showFullTripMarkers, false);
-        document.getElementById('customise').addEventListener('click', customiseMarkers, false);
+        northIsland.addEventListener('click', showNorthIslandMarkers, false);
+        southIsland.addEventListener('click', showSouthIslandMarkers, false);
+        fullTrip.addEventListener('click', showFullTripMarkers, false);
+        customise.addEventListener('click', customiseMarkers, false);
 
         function showNorthIslandMarkers () {
             northIslandData.features.forEach(function (marker) {
@@ -882,6 +841,7 @@
             }
         }
     }
+
 })();
 
 
