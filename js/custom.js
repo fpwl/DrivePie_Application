@@ -5,7 +5,7 @@
 
     //These are variables for the Landing page and App content page.
     var landingPage = document.getElementById('landingPage');
-    var mainAppContent = document.getElementById('mainAppContent')
+    var mainAppContent = document.getElementById('mainAppContent');
     //Form question wrappers variables
     var questionOne = document.getElementById('questionOne');
     var questionOneCustomise = document.getElementById('questionOneCustomise');
@@ -13,10 +13,10 @@
     var questionThree = document.getElementById('questionThree');
     var questionFour = document.getElementById('questionFour');
     //Variable for back button
-    var customiseBackButton = document.getElementById('customiseBackButton')
-    var questionTwoBackButton = document.getElementById('questionTwoBackButton')
-    var questionThreeBackButton = document.getElementById('questionThreeBackButton')
-    var questionFourBackButton = document.getElementById('questionFourBackButton')
+    var customiseBackButton = document.getElementById('customiseBackButton');
+    var questionTwoBackButton = document.getElementById('questionTwoBackButton');
+    var questionThreeBackButton = document.getElementById('questionThreeBackButton');
+    var questionFourBackButton = document.getElementById('questionFourBackButton');
     //Variables for add and minus days and seats
     var addDay = document.getElementById('addDays');
     var minusDay = document.getElementById('minusDays');
@@ -25,10 +25,10 @@
     var minusSeat = document.getElementById('minusSeat');
     var seatCount = 0;
     // Next arrow variables
-    var nextArrowOne = document.getElementById('submitQuestionOne')
-    var nextArrowOneCustomise = document.getElementById('submitQuestionOneCustomise')
-    var nextArrowTwo = document.getElementById('submitQuestionTwo')
-    var nextArrowThree = document.getElementById('submitQuestionThree')
+    var nextArrowOne = document.getElementById('submitQuestionOne');
+    var nextArrowOneCustomise = document.getElementById('submitQuestionOneCustomise');
+    var nextArrowTwo = document.getElementById('submitQuestionTwo');
+    var nextArrowThree = document.getElementById('submitQuestionThree');
     //Trip options variables
     var customiseButton = document.getElementById('customise');
     var northIsland = document.getElementById('northIsland');
@@ -45,7 +45,23 @@
     //Seat and day Quantity variables
     var seatQuantity = document.getElementById('seatQuantity');
     var dayQuantity = document.getElementById('dayQuantity');
-
+    //Vehicle option variables
+    var travelLength = document.getElementById('numberOfDays');
+    var amountOfSeats = document.getElementById('numberOfPeople');
+    var fuelCost = document.getElementById('fuelCost');
+    var fuelCostEquation = document.getElementById('fuelCostCalculation');
+    var totalCost = document.getElementById('totalCost');
+    var travelDistancePrint = document.getElementById('travelDistance');
+    //Vehicle Name and Image
+    var vehicleNameHeader = document.getElementById('vehicleInfoModalLabel');
+    var vehicleImage = document.getElementById('vehicleImage');
+    //Rental Cost Variable
+    var rentalPrice = document.getElementById('rentalPrice');
+    var rentalPriceEquation = document.getElementById('rentalPriceCalculation');
+    //Trip distance values
+    var fullTripDistance = 2500;
+    var northIslandDistance = 978;
+    var southIslandDistance = 1071;
 
     //Event Listeners
 
@@ -55,16 +71,16 @@
     document.getElementById('newSearch').addEventListener('click', showLandingPage, false);
     //Back button event listeners
     customiseBackButton.addEventListener('click', function () {
-        goBackButton(questionOne, questionOneCustomise)
+        goBackButton(questionOne, questionOneCustomise);
     }, false);
     questionTwoBackButton.addEventListener('click', function () {
-        goBackButton(questionOne, questionTwo)
+        goBackButton(questionOne, questionTwo);
     }, false);
     questionThreeBackButton.addEventListener('click', function () {
-        goBackButton(questionTwo, questionThree)
+        goBackButton(questionTwo, questionThree);
     }, false);
     questionFourBackButton.addEventListener('click', function () {
-        goBackButton(questionThree, questionFour)
+        goBackButton(questionThree, questionFour);
     }, false);
     //Add seats and days event listeners 
     addSeat.addEventListener('click', addSeats, false);
@@ -76,6 +92,20 @@
     nextArrowOneCustomise.addEventListener('click', customiseQuestionValidation, false);
     nextArrowTwo.addEventListener('click', questionTwoValidation, false);
     nextArrowThree.addEventListener('click', questionThreeValidation, false);
+    //Vehicle Modal event listeners
+    motorbike.addEventListener('click', function () {
+        vehicleModalInfo("TRIUMPH DAYTONA 650", "img/vehicleImages/motorcycle.jpg", 109, 3.7);
+    }, false);
+    smallCar.addEventListener('click', function () {
+        vehicleModalInfo("2008 SMART FORTWO", "img/vehicleImages/smallCar.jpg", 129, 8.5);
+    }, false);
+    largeCar.addEventListener('click', function () {
+        vehicleModalInfo("MINI COOPER S 3-DOOR HATCH", "img/vehicleImages/largeCar.jpg", 144, 9.7);
+    }, false);
+    motorhome.addEventListener('click', function () {
+        vehicleModalInfo("VOLKSWAGEN CAMPER VAN", "img/vehicleImages/motorhome.jpg", 200, 17);
+    }, false);
+
 //_________________________________________________________________________________________________________________________________________//
 
     //function that hides the loading page
@@ -84,7 +114,7 @@
         mainAppContent.style.display = 'block';
         questionOne.style.display = 'block';
         //Init for mapbox to make the map fit the page 
-        mapbox()
+        mapbox();
         //Init function to close tooltipser once conditional are met
         $('.tippy').tooltipster({
             trigger: 'custom',
@@ -140,7 +170,7 @@
 
      //Make customise route selection to not have same data in start and end location
     $('select').change(function () {
-        var ary = new Array();
+        var ary = [];
         $('select option:selected').each(function () {
             if ($(this).val().length > 0) {
                 ary.push($(this).val());
@@ -219,7 +249,7 @@
     //Validating Question Three 
     function questionThreeValidation() {
         //Invoking grabPreCalculatedDistance function so a travelDistanceValue exists
-        grabPreCalculatedDistance()
+        grabPreCalculatedDistance();
         //Taking seat and day quantity to determine what vehicles will be displayed in question four
         //A for loop to loop through a array data to determine max and min, seat and day values, as well as the type of vehicle to show or hide
         for (var i = 0; i < q3ValiadationArray.length; i++) {
@@ -256,7 +286,7 @@
     //Custom js for mapbox styles
     function mapbox() {
         mapboxgl.accessToken = 'pk.eyJ1IjoiZnB3bCIsImEiOiJjamFib2swNnMwMjU0MndwZGwzdnhmZXBnIn0.0glfG4jZkFJwm0TJLuVriA';
-        //Displaying map 
+        //Displaying mapbox map 
         var map = new mapboxgl.Map({
             container: 'map', // container id
             style: 'mapbox://styles/fpwl/cjan5kfxmeaq02smsehvd41aa', // stylesheet location
@@ -264,12 +294,13 @@
             zoom: 4.2 // starting zoom 
         });
 
-        //Hide and show mapbox markers
+        //Hide and show mapbox markers event listeners
         northIsland.addEventListener('click', showNorthIslandMarkers, false);
         southIsland.addEventListener('click', showSouthIslandMarkers, false);
         fullTrip.addEventListener('click', showFullTripMarkers, false);
         customise.addEventListener('click', customiseMarkers, false);
 
+        //When north Island trip is selected show markers
         function showNorthIslandMarkers () {
             northIslandData.features.forEach(function (marker) {
                 // create a HTML element for each feature
@@ -281,11 +312,9 @@
                     .setLngLat(marker.geometry.coordinates)
                     .addTo(map);
             });
-
-            // document.getElementsByClassName('southMark'[0]).style.displ;
             $('.southMark').hide();
         }
-
+        //When south Island trip is selected show markers
         function showSouthIslandMarkers () {
             southIslandData.features.forEach(function (marker) {
                 // create a HTML element for each feature
@@ -297,10 +326,9 @@
                     .setLngLat(marker.geometry.coordinates)
                     .addTo(map);
             });
-
             $('.northMark').hide();
         }
-
+        //When full trip is selected show markers
         function showFullTripMarkers () {
             northIslandData.features.forEach(function (marker) {
                 // create a HTML element for each feature
@@ -323,7 +351,7 @@
                     .addTo(map);
             });
         }
-
+        //When customise trip is selected hide all markers
         function customiseMarkers () {
             $('.northMark').hide();
             $('.southMark').hide();
@@ -331,18 +359,17 @@
 
         //Grabing customise select values
         $('#sel1').on('change', function () {
+            var el = document.createElement('div');
             var startLoactionValue = document.getElementById('sel1').value;
 
                 //Individual markers for customise section
                 if (startLoactionValue == 'kaitaia') {
-                    var el = document.createElement('div');
                     el.className = 'marker kaitaiaMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(northIslandData.features[0].geometry.coordinates)
                         .addTo(map);
-
+                    //Hiding markers that are not selected
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
                     $('.wanganuiMark').hide();
@@ -355,14 +382,12 @@
                     
                 }
                 if (startLoactionValue == 'auckland') {
-                    var el = document.createElement('div');
                     el.className = 'marker aucklandMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(northIslandData.features[1].geometry.coordinates)
                         .addTo(map);
-                    
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.waikatoMark').hide();
                     $('.wanganuiMark').hide();
@@ -374,14 +399,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'waikato') {
-                    var el = document.createElement('div');
                     el.className = 'marker waikatoMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(northIslandData.features[2].geometry.coordinates)
                         .addTo(map);
-
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.wanganuiMark').hide();
@@ -393,14 +416,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'wanganui') {
-                    var el = document.createElement('div');
                     el.className = 'marker wanganuiMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(northIslandData.features[3].geometry.coordinates)
                         .addTo(map);
-
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
@@ -412,14 +433,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'wellington') {
-                    var el = document.createElement('div');
                     el.className = 'marker wellingtonMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(northIslandData.features[4].geometry.coordinates)
                         .addTo(map);
-
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
@@ -431,14 +450,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'greymouth') {
-                    var el = document.createElement('div');
                     el.className = 'marker greymouthMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(southIslandData.features[0].geometry.coordinates)
                         .addTo(map);
-                    
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
@@ -450,14 +467,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'christchurch') {
-                    var el = document.createElement('div');
                     el.className = 'marker christchurchMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(southIslandData.features[1].geometry.coordinates)
                         .addTo(map);
-
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
@@ -469,14 +484,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'queenstown') {
-                    var el = document.createElement('div');
                     el.className = 'marker queenstownMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(southIslandData.features[2].geometry.coordinates)
                         .addTo(map);
-
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
@@ -488,14 +501,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'dunedin') {
-                    var el = document.createElement('div');
                     el.className = 'marker dunedinMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(southIslandData.features[3].geometry.coordinates)
                         .addTo(map);
-                    
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
@@ -507,14 +518,12 @@
                     $('.invercargillMark').hide();
                 }
                 if (startLoactionValue == 'invercargill') {
-                    var el = document.createElement('div');
                     el.className = 'marker invercargillMark';
-
                     // make a marker for each feature and add to the map
                     new mapboxgl.Marker(el)
                         .setLngLat(southIslandData.features[4].geometry.coordinates)
                         .addTo(map);
-
+                    //Hiding markers that are not selected
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
                     $('.waikatoMark').hide();
@@ -525,6 +534,7 @@
                     $('.queenstownMark').hide();
                     $('.dunedinMark').hide();
                 }
+
                 if(startLoactionValue == '') {
                     $('.kaitaiaMark').hide();
                     $('.aucklandMark').hide();
@@ -537,21 +547,20 @@
                     $('.dunedinMark').hide();
                     $('.invercargillMark').hide();
                 }
-        })
+        });
 
         $('#sel2').on('change', function () {
+            var el = document.createElement('div');
             var endLoactionValue = document.getElementById('sel2').value;
 
             //Individual markers for customise section
             if (endLoactionValue == 'kaitaia') {
-                var el = document.createElement('div');
                 el.className = 'marker kaitaiaMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(northIslandData.features[0].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
                 $('.wanganuiMarkEnd').hide();
@@ -564,14 +573,12 @@
 
             }
             if (endLoactionValue == 'auckland') {
-                var el = document.createElement('div');
                 el.className = 'marker aucklandMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(northIslandData.features[1].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
                 $('.wanganuiMarkEnd').hide();
@@ -583,14 +590,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'waikato') {
-                var el = document.createElement('div');
                 el.className = 'marker waikatoMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(northIslandData.features[2].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.wanganuiMarkEnd').hide();
@@ -602,14 +607,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'wanganui') {
-                var el = document.createElement('div');
                 el.className = 'marker wanganuiMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(northIslandData.features[3].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
@@ -621,14 +624,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'wellington') {
-                var el = document.createElement('div');
                 el.className = 'marker wellingtonMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(northIslandData.features[4].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
@@ -640,14 +641,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'greymouth') {
-                var el = document.createElement('div');
                 el.className = 'marker greymouthMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(southIslandData.features[0].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
@@ -659,14 +658,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'christchurch') {
-                var el = document.createElement('div');
                 el.className = 'marker christchurchMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(southIslandData.features[1].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
@@ -678,14 +675,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'queenstown') {
-                var el = document.createElement('div');
                 el.className = 'marker queenstownMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(southIslandData.features[2].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
@@ -697,14 +692,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'dunedin') {
-                var el = document.createElement('div');
                 el.className = 'marker dunedinMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(southIslandData.features[3].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
@@ -716,14 +709,12 @@
                 $('.invercargillMarkEnd').hide();
             }
             if (endLoactionValue == 'invercargill') {
-                var el = document.createElement('div');
                 el.className = 'marker invercargillMarkEnd';
-
                 // make a marker for each feature and add to the map
                 new mapboxgl.Marker(el)
                     .setLngLat(southIslandData.features[4].geometry.coordinates)
                     .addTo(map);
-
+                //Hiding markers that are not selected
                 $('.kaitaiaMarkEnd').hide();
                 $('.aucklandMarkEnd').hide();
                 $('.waikatoMarkEnd').hide();
@@ -746,50 +737,22 @@
                 $('.dunedinMarkEnd').hide();
                 $('.invercargillMarkEnd').hide();
             }
-        })
+        });
     }
 
 //____________________________________________________________________________________________________//
 
-//Vehicle Option Modal Functions
-    //Vehicle option variables
-    var travelLength = document.getElementById('numberOfDays');
-    var amountOfSeats = document.getElementById('numberOfPeople');
-    var fuelCost = document.getElementById('fuelCost');
-    var fuelCostEquation = document.getElementById('fuelCostCalculation');
-    var totalCost = document.getElementById('totalCost');
-    var travelDistancePrint = document.getElementById('travelDistance');
-    //Vehicle Name and Image
-    var vehicleNameHeader = document.getElementById('vehicleInfoModalLabel');
-    var vehicleImage = document.getElementById('vehicleImage');
-    //Rental Cost Variable
-    var rentalPrice = document.getElementById('rentalPrice');
-    var rentalPriceEquation = document.getElementById('rentalPriceCalculation');
-    //Trip distance values
-    var fullTripDistance = 2500;
-    var northIslandDistance = 978;
-    var southIslandDistance = 1071;
+    //Vehicle Option Modal Functions
 
+    //Array to store the trip distance when chosen
     var travelDistanceValue = [];
 
-    motorbike.addEventListener('click', function () {
-        vehicleModalInfo("TRIUMPH DAYTONA 650", "img/vehicleImages/motorcycle.jpg", 109, 3.7)
-    }, false);
-    smallCar.addEventListener('click', function () {
-        vehicleModalInfo("2008 SMART FORTWO", "img/vehicleImages/smallCar.jpg", 129, 8.5)
-    }, false);
-    largeCar.addEventListener('click', function () {
-        vehicleModalInfo("MINI COOPER S 3-DOOR HATCH", "img/vehicleImages/largeCar.jpg", 144, 9.7)
-    }, false);
-    motorhome.addEventListener('click', function () {
-        vehicleModalInfo("VOLKSWAGEN CAMPER VAN", "img/vehicleImages/motorhome.jpg", 200, 17)
-    }, false);
-
+    //Function to display data inside modal depending on which car the user selects
     function vehicleModalInfo (carName, carImage, rentalCost, fuelCapacity) {
         var rentalPriceArray = [];
         var fuelCostArray = [];
 
-        grabPreCalculatedDistance()
+        grabPreCalculatedDistance();
         vehicleNameHeader.textContent = carName;
         vehicleImage.src = carImage;
         travelLength.textContent = dayQuantity.value + ' days';
@@ -811,27 +774,32 @@
         totalCost.textContent = '$' + totalCostValue;
     }
 
+    //Function to add a travelDistance to the travelDistanceValue Array.
     function grabPreCalculatedDistance () {
+        var travelDistance;
+
         if (fullTrip.checked) {
-            var travelDistance = fullTripDistance;
+            travelDistance = fullTripDistance;
             travelDistanceValue.splice(0, 1, travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (northIsland.checked) {
-            var travelDistance = northIslandDistance;
+            travelDistance = northIslandDistance;
             travelDistanceValue.splice(0, 1, travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
         if (southIsland.checked) {
-            var travelDistance = southIslandDistance;
+            travelDistance = southIslandDistance;
             travelDistanceValue.splice(0, 1, travelDistance);
             travelDistancePrint.textContent = travelDistance + ' km';
         }
+       
         if (customiseButton.checked) {
-            customisedDistanceValues()
+            customisedDistanceValues();
         }
     }
 
+     //Due to the customisation could have multiple values possiblities, the for loop, calculates the customise distance and pushes it to the travelDistanceArray
     function customisedDistanceValues() {
         for (var i = 0; i < routeDataArray.length; i++) {
             if ((startingPointSelect.value == routeDataArray[i][0] || startingPointSelect.value == routeDataArray[i][1]) && (endingPointSelect.value == routeDataArray[i][0] || endingPointSelect.value == routeDataArray[i][1])) {

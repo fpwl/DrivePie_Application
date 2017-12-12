@@ -393,13 +393,13 @@ var routeDataArray = [
     ["queenstown", "dunedin", 42],    
     ["queenstown", "invercargill", 43], 
     ["dunedin", "invercargill", 44], 
-]
+];
 
 var q3ValiadationArray = [
     [1, 1, 1, 5, motorbike],
     [1, 2, 1, 10, smallCar],
     [1, 5, 3, 10, largeCar],
     [2, 6, 2, 15, motorhome]
-]
+];
 
 
