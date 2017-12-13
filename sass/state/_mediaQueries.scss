@@ -10,20 +10,22 @@
             }
         }
     }
-
-    .vehicle-options-wrapper{
-        .vehicle-option:hover{
-            background-color: $darkColor!important;
-            cursor: pointer;
-            img{
-                display: none;
-            }
-            p{
-                display: block!important;
-                font-size: $h4FontSize;
-                font-weight: $boldFontWeight;
-                color: $secondaryColor;
-                margin: 0;
+    .vehicle-options-container{
+        overflow: auto;
+        .vehicle-options-wrapper{
+            .vehicle-option:hover{
+                background-color: $darkColor!important;
+                cursor: pointer;
+                img{
+                    display: none;
+                }
+                p{
+                    display: block!important;
+                    font-size: $h4FontSize;
+                    font-weight: $boldFontWeight;
+                    color: $secondaryColor;
+                    margin: 0;
+                }
             }
         }
     }

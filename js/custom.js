@@ -118,6 +118,7 @@
         //Init function to close tooltipser once conditional are met
         $('.tippy').tooltipster({
             trigger: 'custom',
+            maxWidth: 500,
             triggerClose: {
                 click: true,
                 hover: true
@@ -269,7 +270,11 @@
                 //Hide specified vehicle if the conidtional do not meet
                 q3ValiadationArray[i][4].style.display = 'none';
                 //The conditionals below is to show different tool tips content depending on conditional requirements
-                if (travelDistanceValue < 1080 && dayQuantity.value < 1) {
+                if (dayQuantity.value < 2 && seatQuantity.value > 2 ) {
+                    $('.daysTippy').tooltipster('open');
+                    $('.daysTippy').tooltipster('content', 'Due to the amount of Seats and Days you have chosen there are no avaliable vehicles avaliable. To continue please change your selections.');
+                }
+                else if (travelDistanceValue < 1080 && dayQuantity.value < 1) {
                     $('.daysTippy').tooltipster('open');
                     $('.daysTippy').tooltipster('content', 'Please add some Days.');
                 }
@@ -277,6 +282,7 @@
                     $('.daysTippy').tooltipster('open');
                     $('.daysTippy').tooltipster('content', 'The route chosen exceeds 1080km. For your saftey please extend your trip to 2 or more days');
                 }
+                
             }
         }
     }
