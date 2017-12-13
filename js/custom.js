@@ -272,7 +272,7 @@
                 //The conditionals below is to show different tool tips content depending on conditional requirements
                 if (dayQuantity.value < 2 && seatQuantity.value > 2 ) {
                     $('.daysTippy').tooltipster('open');
-                    $('.daysTippy').tooltipster('content', 'Due to the amount of Seats and Days you have chosen there are no avaliable vehicles avaliable. To continue please change your selections.');
+                    $('.daysTippy').tooltipster('content', 'Due to the amount of Seats and Days you have chosen there are no available vehicles available. To continue please change your selections.');
                 }
                 else if (travelDistanceValue < 1080 && dayQuantity.value < 1) {
                     $('.daysTippy').tooltipster('open');
